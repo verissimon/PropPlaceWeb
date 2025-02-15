@@ -14,7 +14,7 @@ function Separador({texto, children:complemento}:SeparadorPropriedades) {
             <div className="flex justify-between items-center w-full">
                 <p className="text-t20 text-paleta-secundaria font-medium md:text-t24">{texto}</p>
 
-                {complemento ? complemento : <></>}
+                {!!complemento && complemento}
             </div>
 
             <div className="w-full h-1 rounded-full bg-paleta-secundaria"></div>
@@ -66,7 +66,7 @@ function Icone({icone, children:texto}:IconePropriedades) {
             <Dica visivel={dicaVisivel} posicionamento="end-0" estilo="w-[50vw] min-w-[16rem] max-w-lg">
                 <Dica.Texto>{texto}</Dica.Texto>
             </Dica>
-            <img className="w-5 aspect-square md:w-6" src={icone || informacao} />
+            <img className="w-5 aspect-square md:w-6" src={icone || informacao} alt="Ícone de mais informações" />
         </div>
     );
 }

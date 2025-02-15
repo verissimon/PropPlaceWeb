@@ -10,15 +10,12 @@ interface DicaPropriedades {
 function Dica({visivel, posicionamento, estilo, children:conteudo}:DicaPropriedades) {
     return (
         <>
-            {
-                visivel ?
-                    <div className={"absolute -translate-y-full pb-2 " + posicionamento}>
-                        <div className={"bg-paleta-fundo border-2 border-paleta-auxiliar rounded-xl p-4 z-1 md:p-6 " + estilo}>
-                            {conteudo}
-                        </div>
+            { visivel &&
+                <div className={"absolute -translate-y-full pb-2 " + posicionamento}>
+                    <div className={"bg-paleta-fundo border-2 border-paleta-auxiliar rounded-xl p-4 z-1 md:p-6 " + estilo}>
+                        {conteudo}
                     </div>
-                : <></>
-                
+                </div>    
             }
         </>
     );
