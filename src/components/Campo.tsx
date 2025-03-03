@@ -1,57 +1,24 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { CampoIcones, icones } from '@/utils/Icones';
+import { InputHTMLAttributes } from 'react';
+import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
-import aviso from '../assets/aviso.svg';
-import cadeado from '../assets/cadeado.svg';
-import email from '../assets/email.svg';
-import lupa from '../assets/lupa.svg';
-import pessoa from '../assets/pessoa.svg';
-import telefone from '../assets/telefone.svg';
-
-const icones = { cadeado, email, lupa, pessoa, telefone };
-
-enum CampoIcones {
-  CADEADO = 'cadeado',
-  EMAIL = 'email',
-  LUPA = 'lupa',
-  PESSOA = 'pessoa',
-  TELEFONE = 'telefone',
-}
-
-interface CampoPropriedades {
-  nome: string;
-  aoMudar: (parametro: string) => void;
+interface CampoPropriedades extends InputHTMLAttributes<HTMLInputElement> {
   titulo?: string;
-  marcador?: string;
   valorInicial?: string;
-  feedback?: string;
-  tipo?: string;
+  feedback?: FieldError;
   ativo?: boolean;
   icone?: CampoIcones;
+  register?: UseFormRegisterReturn;
 }
 
 function Campo({
-  nome,
-  aoMudar,
   titulo,
-  marcador,
-  valorInicial,
+  register,
   feedback,
-  tipo = 'text',
-  ativo,
+  ativo = true,
   icone,
+  ...rest
 }: CampoPropriedades) {
-  const [valor, definirValor] = useState('');
-
-  useEffect(() => {
-    definirValor(valorInicial || '');
-  }, [valorInicial, ativo]);
-
-  function mudancaValor(evento: ChangeEvent<HTMLInputElement>) {
-    const novoValor = evento.currentTarget.value || '';
-    definirValor(novoValor);
-    aoMudar(novoValor);
-  }
-
   return (
     <div className="flex flex-col gap-2 w-full">
       {titulo && (
@@ -69,17 +36,13 @@ function Campo({
         }
       >
         <input
+          {...register}
+          disabled={!ativo}
           className={
             'text-t14 grow placeholder-paleta-auxiliar bg-transparent outline-none md:text-t16 ' +
             (ativo ? 'text-paleta-secundaria' : 'text-paleta-auxiliar')
           }
-          name={nome}
-          type={tipo}
-          onChange={mudancaValor}
-          placeholder={marcador}
-          value={valor}
-          disabled={!ativo}
-          key={nome}
+          {...rest}
         />
 
         {icone && (
@@ -95,11 +58,11 @@ function Campo({
         <div className="flex items-center gap-2 w-full">
           <img
             className="w-4 h-4 md:w-5 md:h-5"
-            src={aviso}
+            src={icones.aviso}
             alt="Ícone de aviso"
           />
           <p className="text-t14 text-paleta-destrutiva w-full md:text-t16">
-            {feedback}
+            {feedback?.message}
           </p>
         </div>
       )}

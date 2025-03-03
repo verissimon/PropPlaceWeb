@@ -1,3 +1,5 @@
+import { Campo } from '@/components/Campo';
+import { CampoIcones } from '@/utils/Icones';
 import { registroSchema, TFormRegistroSchema } from '@/utils/validationSchemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -26,6 +28,7 @@ function Registro() {
       console.log('Dados enviados:', data);
       await new Promise(resolve => setTimeout(resolve, 1500));
       alert('Registro realizado com sucesso!');
+      // redirecionar para index
       reset();
     } catch (error) {
       console.error('Erro ao registrar:', error);
@@ -34,94 +37,52 @@ function Registro() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-center">Criar Conta</h2>
+    <div className="max-w-md mx-auto p-6 rounded-lg shadow-md bg-paleta-fundo">
+      <h2 className="text-paleta-secundaria text-2xl font-bold mb-6 text-center">
+        Registre-se
+      </h2>
 
       <form onSubmit={handleSubmit(enviar)} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1">
-            Nome Completo
-          </label>
-          <input
-            type="text"
-            {...register('nome')}
-            className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
-          />
-          {errors.nome && (
-            <p className="mt-1 text-sm text-red-600">{errors.nome.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">
-            Nome de Usuário
-          </label>
-          <input
-            type="text"
-            {...register('username')}
-            className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
-          />
-          {errors.username && (
-            <p className="mt-1 text-sm text-red-600">
-              {errors.username.message}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Telefone</label>
-          <input
-            type="tel"
-            placeholder="(99) 99999-9999"
-            {...register('telefone')}
-            className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
-          />
-          {errors.telefone && (
-            <p className="mt-1 text-sm text-red-600">
-              {errors.telefone.message}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Email</label>
-          <input
-            type="email"
-            {...register('email')}
-            className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
-          />
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Senha</label>
-          <input
-            type="password"
-            {...register('senha')}
-            className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
-          />
-          {errors.senha && (
-            <p className="mt-1 text-sm text-red-600">{errors.senha.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">
-            Confirmar Senha
-          </label>
-          <input
-            type="password"
-            {...register('senhaRepetida')}
-            className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
-          />
-          {errors.senhaRepetida && (
-            <p className="mt-1 text-sm text-red-600">
-              {errors.senhaRepetida.message}
-            </p>
-          )}
-        </div>
+        <Campo
+          titulo="Nome completo"
+          icone={CampoIcones.PESSOA}
+          feedback={errors.nome}
+          register={register('nome')}
+        />
+        <Campo
+          titulo="Nome de usuário"
+          icone={CampoIcones.PESSOA}
+          feedback={errors.username}
+          register={register('username')}
+        />
+        <Campo
+          titulo="Telefone"
+          icone={CampoIcones.TELEFONE}
+          feedback={errors.telefone}
+          register={register('telefone')}
+          placeholder="(99) 99999-9999"
+        />
+        <Campo
+          titulo="E-mail"
+          type="email"
+          icone={CampoIcones.EMAIL}
+          feedback={errors.email}
+          register={register('email')}
+        />
+        <Campo
+          titulo="Senha"
+          type="password"
+          icone={CampoIcones.CADEADO}
+          feedback={errors.senha}
+          register={register('senha')}
+        />
+        <Campo
+          titulo="Confirmar senha"
+          type="password"
+          icone={CampoIcones.CADEADO}
+          feedback={errors.senhaRepetida}
+          register={register('senhaRepetida')}
+        />
 
         <button
           type="submit"
