@@ -4,7 +4,10 @@ const registroSchema = z
   .object({
     nome: z.string().nonempty('Nome é obrigatório'),
     username: z.string().nonempty('Nome de usuário é obrigatório'),
-    telefone: z.string().nonempty('Telefone é obrigatório'),
+    telefone: z
+      .string()
+      .nonempty('Telefone é obrigatório')
+      .regex(/^\d{11}$/, 'Deve conter apenas 11 caracteres numéricos'),
     email: z
       .string()
       .email('Endereço de email inválido')
@@ -20,9 +23,6 @@ const registroSchema = z
   .refine(campos => campos.senha === campos.senhaRepetida, {
     message: 'As senhas não coincidem',
     path: ['senhaRepetida'],
-  })
-  .refine(campos => campos.telefone.match(/\d+/g)?.join('').length === 11, {
-    message: 'Número de telefone inválido',
   });
 
 type TFormRegistroSchema = z.infer<typeof registroSchema>;
