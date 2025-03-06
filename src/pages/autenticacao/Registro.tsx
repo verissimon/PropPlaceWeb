@@ -1,3 +1,4 @@
+import { Botao } from '@/components/Botao';
 import { Campo } from '@/components/Campo';
 import { CampoIcones } from '@/utils/Icones';
 import { registroSchema, TFormRegistroSchema } from '@/utils/validationSchemas';
@@ -37,7 +38,7 @@ function Registro() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 rounded-lg shadow-md bg-paleta-fundo">
+    <div className="max-w-2xl mx-auto p-6 rounded-lg shadow-md bg-paleta-fundo">
       <h2 className="text-paleta-secundaria text-2xl font-bold mb-6 text-center">
         Registre-se
       </h2>
@@ -83,17 +84,14 @@ function Registro() {
           feedback={errors.senhaRepetida}
           register={register('senhaRepetida')}
         />
-
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded disabled:opacity-50"
-        >
-          {isSubmitting ? 'Processando...' : 'Criar Conta'}
-        </button>
+        <div className="w-full flex justify-center">
+          <Botao variante="enviar" type="submit" isLoading={isSubmitting}>
+            <Botao.Titulo>Enviar</Botao.Titulo>
+          </Botao>
+        </div>
       </form>
     </div>
   );
 }
 
-export default Registro;
+export { Registro };
