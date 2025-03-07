@@ -25,28 +25,28 @@ function Modal({ titulo, subtitulo, onClose, visible, children }: ModalProps) {
       onClick={onClose}
     >
       <div
-        className={`bg-paleta-fundo rounded-lg p-6 w-full max-w-md transform transition-transform duration-200 ${visible ? 'scale-100' : 'scale-90'}`}
+        className={`bg-paleta-fundo rounded-lg p-4 md:p-6 w-full max-w-md transform transition-transform duration-200 ${visible ? 'scale-100' : 'scale-90'}`}
         onClick={e => e.stopPropagation()}
       >
-        <div className="flex justify-between items-center border-b pb-2 mb-4">
-          <h2 className="text-xl text-paleta-secundaria font-semibold">
+        <div className="flex justify-between items-center border-b pb-2 mb-2 md:pb-4 md:mb-4">
+          <h2 className="text-lg md:text-xl text-paleta-secundaria font-semibold">
             {titulo}
           </h2>
           <button
             onClick={onClose}
-            className="bg-paleta-primaria text-paleta-secundaria hover:text-paleta-auxiliar"
+            className="bg-paleta-primaria text-paleta-secundaria hover:text-paleta-auxiliar text-sm md:text-base"
           >
             &times;
           </button>
         </div>
-        <div className="mb-4">
+        <div className="mb-2 md:mb-4">
           {subtitulo && subtitulo.trim().length > 0 && (
-            <h4 className="text-lg text-paleta-secundaria font-medium">
+            <h4 className="text-base md:text-lg text-paleta-secundaria font-medium">
               {subtitulo}
             </h4>
           )}
         </div>
-        <div className="flex flex-col items-center justify-center gap-4">
+        <div className="flex flex-col items-center justify-center gap-2 md:gap-4">
           {children}
         </div>
       </div>
