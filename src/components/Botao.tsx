@@ -21,7 +21,7 @@ function Titulo({ children }: HTMLAttributes<HTMLParagraphElement>) {
 
   return (
     <p
-      className={clsx('text-g font-regular', {
+      className={clsx('text-sm font-regular md:text-base lg:text-lg', {
         'text-paleta-secundaria': variante === 'inativo',
         'text-paleta-branca': variante !== 'inativo',
       })}
@@ -41,7 +41,7 @@ function Botao({
   return (
     <button
       className={clsx(
-        'h-12 flex-row items-center justify-center rounded-lg gap-2 px-4 disabled:opacity-50',
+        'lg:h-12 flex-row items-center justify-center rounded-lg gap-2 px-4 disabled:opacity-50',
         {
           'bg-paleta-secundaria': variante === 'generico',
           'bg-paleta-terciaria': variante === 'inativo',
