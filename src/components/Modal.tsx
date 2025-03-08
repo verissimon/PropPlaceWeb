@@ -1,3 +1,4 @@
+import { icones } from '@/utils/Icones';
 import React, { useEffect, useState } from 'react';
 
 type ModalProps = {
@@ -28,15 +29,15 @@ function Modal({ titulo, subtitulo, onClose, visible, children }: ModalProps) {
         className={`bg-paleta-fundo rounded-lg p-4 md:p-6 w-full max-w-md transform transition-transform duration-200 ${visible ? 'scale-100' : 'scale-90'}`}
         onClick={e => e.stopPropagation()}
       >
-        <div className="flex justify-between items-center border-b pb-2 mb-2 md:pb-4 md:mb-4">
+        <div className="flex justify-between items-center pb-2 mb-2 md:pb-4 md:mb-4">
           <h2 className="text-lg md:text-xl text-paleta-secundaria font-semibold">
             {titulo}
           </h2>
           <button
             onClick={onClose}
-            className="bg-paleta-primaria text-paleta-secundaria hover:text-paleta-auxiliar text-sm md:text-base"
+            className="bg-paleta-primaria text-paleta-secundaria hover:text-paleta-auxiliar md:text-base"
           >
-            &times;
+            <img src={icones.X} alt="icone X" width={10} height={10} />
           </button>
         </div>
         <div className="mb-2 md:mb-4">
