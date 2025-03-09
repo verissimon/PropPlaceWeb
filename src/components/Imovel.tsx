@@ -24,7 +24,7 @@ function Imovel({
       <img
         src={imagem}
         alt={'Imagem do imóvel ' + nome}
-        className="w-[120px] aspect-square flex-shrink-0 rounded-xl md:w-40"
+        className="border border-paleta-secundaria w-[120px] aspect-square flex-shrink-0 rounded-xl md:w-40"
       />
 
       <div className="flex flex-col justify-between overflow-hidden w-full h-full">
