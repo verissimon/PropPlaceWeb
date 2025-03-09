@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router';
 
+import imovelPadrao from '@/assets/imovelPadrao.svg';
+
 interface ImovelPropriedades {
   id: string;
   imagem: string;
@@ -22,7 +24,7 @@ function Imovel({
   return (
     <div className="flex flex-row gap-4 text-paleta-secundaria w-full md:min-w-sm">
       <img
-        src={imagem}
+        src={imagem || imovelPadrao}
         alt={'Imagem do imóvel ' + nome}
         className="border border-paleta-secundaria w-[120px] aspect-square flex-shrink-0 rounded-xl md:w-40"
       />
