@@ -1,6 +1,7 @@
 import { CampoIcones, icones } from '@/utils/Icones';
 import { InputHTMLAttributes } from 'react';
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
+import { Feedback } from './Feedback';
 
 interface CampoPropriedades extends InputHTMLAttributes<HTMLInputElement> {
   titulo?: string;
@@ -54,18 +55,7 @@ function Campo({
         )}
       </div>
 
-      {feedback && (
-        <div className="flex items-center gap-2 w-full">
-          <img
-            className="w-4 h-4 md:w-5 md:h-5"
-            src={icones.aviso}
-            alt="Ícone de aviso"
-          />
-          <p className="text-t14 text-paleta-destrutiva w-full md:text-t16">
-            {feedback?.message}
-          </p>
-        </div>
-      )}
+      {feedback && <Feedback>{feedback.message!}</Feedback>}
     </div>
   );
 }
