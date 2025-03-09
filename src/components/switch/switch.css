@@ -1,0 +1,105 @@
+@keyframes ativar-barra {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  50%,
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes ativar-botao {
+  0% {
+    left: 0;
+    box-shadow: inset -8px 0px 8px 0px #00000040;
+  }
+
+  50%,
+  100% {
+    left: 100%;
+    box-shadow: inset 8px 0px 8px 0px #00000040;
+    transform: translateX(-100%);
+  }
+}
+
+.botao-inativo {
+  left: 0;
+  box-shadow: inset -8px 0px 8px 0px #00000040;
+  z-index: 10;
+}
+
+.animar-botao-inativo {
+  animation-name: ativar-botao;
+  animation-duration: 600ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
+
+.barra-inativa {
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.barra-inativa > div {
+  transform: translateX(-100%);
+}
+
+.animar-barra-inativa > div {
+  animation-name: ativar-barra;
+  animation-duration: 600ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
+
+@keyframes desativar-barra {
+  0% {
+    transform: translateX(100%);
+  }
+
+  50%,
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes desativar-botao {
+  0% {
+    right: 0;
+    box-shadow: inset 8px 0px 8px 0px #00000040;
+  }
+
+  50%,
+  100% {
+    right: 100%;
+    box-shadow: inset -8px 0px 8px 0px #00000040;
+    transform: translateX(100%);
+  }
+}
+
+.botao-ativo {
+  right: 0;
+  box-shadow: inset 8px 0px 8px 0px #00000040;
+  z-index: 10;
+}
+
+.animar-botao-ativo {
+  animation-name: desativar-botao;
+  animation-duration: 600ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
+
+.barra-ativa {
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.barra-ativa > div {
+  transform: translateX(100%);
+}
+
+.animar-barra-ativa > div {
+  animation-name: desativar-barra;
+  animation-duration: 600ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
