@@ -72,7 +72,7 @@ function Cabecalho() {
   ];
 
   return (
-    <header className="flex flex-row justify-between items-center fixed bg-paleta-primaria rounded-b-3xl w-full top-0 px-6 py-2 md:px-20">
+    <header className="flex flex-row justify-between items-center fixed z-50 bg-paleta-primaria rounded-b-3xl w-full top-0 px-6 py-2 md:px-20">
       <div className="flex flex-row items-center gap-2 md:gap-4">
         <img
           src={logo}
