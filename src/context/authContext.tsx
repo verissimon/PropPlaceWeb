@@ -59,7 +59,7 @@ function SessionProvider({ children }: IProps) {
       return 'sucesso';
     } catch (error) {
       console.error('Falha ao logar', error);
-      return 'erro';
+      throw error;
     } finally {
       defineIsLoading(false);
     }
