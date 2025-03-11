@@ -28,7 +28,13 @@ const registroSchema = z
     path: ['senhaRepetida'],
   });
 
-type TFormRegistroSchema = z.infer<typeof registroSchema>;
+const loginSchema = z.object({
+  login: z.union([
+    z.string().email('Endereço de e-mail ou nome de usuário inválido'),
+    z.string().nonempty('Nome de usuário ou endereço de e-mail é obrigatório'),
+  ]),
+  senha: z.string().nonempty('Senha é obrigatória'),
+});
 
 const perfilSchema = z.object({
   nome: z.string().nonempty(mensagemCampoVazio),
@@ -42,7 +48,11 @@ const perfilSchema = z.object({
     .regex(/^\d{11}$/, 'Número de telefone inválido'),
   nomeUsuario: z.string().nonempty(mensagemCampoVazio),
 });
+
+type TFormLoginSchema = z.infer<typeof loginSchema>;
+type TFormRegistroSchema = z.infer<typeof registroSchema>;
 type TFormPerfilSchema = z.infer<typeof perfilSchema>;
 
-export { registroSchema, perfilSchema };
-export type { TFormRegistroSchema, TFormPerfilSchema };
+
+export { registroSchema, loginSchema, perfilSchema };
+export type { TFormRegistroSchema, TFormLoginSchema, TFormPerfilSchema };

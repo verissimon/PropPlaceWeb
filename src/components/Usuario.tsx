@@ -1,6 +1,5 @@
+import { icones } from '@/utils/Icones';
 import { useNavigate } from 'react-router';
-
-import usuarioPadrao from '@/assets/usuarioPadrao.svg';
 
 interface UsuarioPropriedades {
   id: string;
@@ -18,7 +17,7 @@ function Usuario({ id, nome, imagem, ocupacao }: UsuarioPropriedades) {
       onClick={() => navegar('/usuarios/' + id)}
     >
       <img
-        src={imagem || usuarioPadrao}
+        src={imagem || icones.usuarioPadrao}
         alt={'Foto de perfil de ' + nome}
         className="border border-paleta-secundaria w-20 aspect-square rounded-full flex-shrink-0 md:w-[100px]"
       />
