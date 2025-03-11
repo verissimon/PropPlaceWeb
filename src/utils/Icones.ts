@@ -6,6 +6,8 @@ import pessoa from '../assets/pessoa.svg';
 import seta from '../assets/seta.svg';
 import telefone from '../assets/telefone.svg';
 import X from '@/assets/x.svg';
+import filtro from '@/assets/filtro.svg';
+import filtro2 from '@/assets/filtro-2.svg';
 
 export const icones = {
   cadeado,
@@ -16,6 +18,8 @@ export const icones = {
   telefone,
   aviso,
   X,
+  filtro,
+  filtro2,
 };
 
 export enum CampoIcones {
