@@ -1,5 +1,8 @@
 import { z } from 'zod';
 
+const mensagemCampoVazio =
+  'Essa informação é obrigatória e não pode estar vazia';
+
 const registroSchema = z
   .object({
     nome: z.string().nonempty('Nome é obrigatório'),
@@ -25,7 +28,31 @@ const registroSchema = z
     path: ['senhaRepetida'],
   });
 
-type TFormRegistroSchema = z.infer<typeof registroSchema>;
+const loginSchema = z.object({
+  login: z.union([
+    z.string().email('Endereço de e-mail ou nome de usuário inválido'),
+    z.string().nonempty('Nome de usuário ou endereço de e-mail é obrigatório'),
+  ]),
+  senha: z.string().nonempty('Senha é obrigatória'),
+});
 
-export { registroSchema };
-export type { TFormRegistroSchema };
+const perfilSchema = z.object({
+  nome: z.string().nonempty(mensagemCampoVazio),
+  email: z
+    .string()
+    .nonempty(mensagemCampoVazio)
+    .email('Endereço de e-mail inválido'),
+  telefone: z
+    .string()
+    .nonempty(mensagemCampoVazio)
+    .regex(/^\d{11}$/, 'Número de telefone inválido'),
+  nomeUsuario: z.string().nonempty(mensagemCampoVazio),
+});
+
+type TFormLoginSchema = z.infer<typeof loginSchema>;
+type TFormRegistroSchema = z.infer<typeof registroSchema>;
+type TFormPerfilSchema = z.infer<typeof perfilSchema>;
+
+
+export { registroSchema, loginSchema, perfilSchema };
+export type { TFormRegistroSchema, TFormLoginSchema, TFormPerfilSchema };

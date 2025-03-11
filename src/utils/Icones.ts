@@ -1,22 +1,38 @@
-import aviso from '../assets/aviso.svg';
-import cadeado from '../assets/cadeado.svg';
-import email from '../assets/email.svg';
-import lupa from '../assets/lupa.svg';
-import pessoa from '../assets/pessoa.svg';
-import seta from '../assets/seta.svg';
-import telefone from '../assets/telefone.svg';
+import aviso from '@/assets/aviso.svg';
+import cadeado from '@/assets/cadeado.svg';
+import email from '@/assets/email.svg';
+import imovelPadrao from '@/assets/imovelPadrao.svg';
+import informacao from '@/assets/informacao.svg';
+import logo from '@/assets/logo.svg';
+import lupa from '@/assets/lupa.svg';
+import pessoa from '@/assets/pessoa.svg';
+import pinImovelAtual from '@/assets/pinImovelAtual.svg';
+import pinImovelDisponivel from '@/assets/pinImovelDisponivel.svg';
+import pinImovelIndisponivel from '@/assets/pinImovelIndisponivel.svg';
+import pinToque from '@/assets/pinToque.svg';
+import seta from '@/assets/seta.svg';
+import telefone from '@/assets/telefone.svg';
+import usuarioPadrao from '@/assets/usuarioPadrao.svg';
 import X from '@/assets/x.svg';
 import filtro from '@/assets/filtro.svg';
 import filtro2 from '@/assets/filtro-2.svg';
 
 export const icones = {
+  aviso,
   cadeado,
   email,
+  imovelPadrao,
+  informacao,
+  logo,
   lupa,
   pessoa,
+  pinImovelAtual,
+  pinImovelDisponivel,
+  pinImovelIndisponivel,
+  pinToque,
   seta,
   telefone,
-  aviso,
+  usuarioPadrao,
   X,
   filtro,
   filtro2,
