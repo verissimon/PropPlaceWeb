@@ -38,11 +38,7 @@ function Busca() {
         </div>
 
         <div className="flex my-4">
-          <Switch
-            aoMudar={function (): void {
-              throw new Error('Function not implemented.');
-            }}
-          />
+          <Switch aoMudar={() => {}} />
           <p className="h-fit mt-1 ml-4 text-t24 text-paleta-secundaria font-medium">
             Incluir imóveis indisponíveis
           </p>
