@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, TFormLoginSchema } from '@/utils/validationSchemas';
 import { AxiosErrorResponse } from '@/utils/axiosErrorResponseType';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 function Login() {
   const navegar = useNavigate();
@@ -35,13 +35,13 @@ function Login() {
       await logar(data.login, data.senha);
 
       defineMensagem(`Bem vindo, ${data.login}!`);
-      defineModalAberto(true);
 
       reset();
     } catch (error) {
       const axiosError = error as AxiosErrorResponse;
 
       defineMensagem(`Falha ao logar: ${axiosError.response.data.message}`);
+    } finally {
       defineModalAberto(true);
     }
   };
@@ -49,7 +49,6 @@ function Login() {
   function handleFechamentoModal() {
     if (mensagem && mensagem.includes('Falha')) {
       defineModalAberto(false);
-      reset();
       return;
     }
     if (mensagem && mensagem.includes('Bem vindo')) {
@@ -70,27 +69,33 @@ function Login() {
             <br />
             Faça log-in para acessar sua conta
           </h2>
-          <div className="flex gap-6">
-            <form onSubmit={handleSubmit(enviar)} className="space-y-4 w-full">
-              <Campo
-                titulo="Nome de usuário ou e-mail"
-                icone={CampoIcones.PESSOA}
-                feedback={errors.login}
-                register={register('login')}
-              />
-              <Campo
-                titulo="Senha"
-                type="password"
-                icone={CampoIcones.CADEADO}
-                feedback={errors.senha}
-                register={register('senha')}
-              />
-              <div className="w-full flex justify-center">
-                <Botao variante="enviar" type="submit" isLoading={isSubmitting}>
-                  <Botao.Titulo>Entrar</Botao.Titulo>
-                </Botao>
-              </div>
-            </form>
+          <form onSubmit={handleSubmit(enviar)} className="space-y-4 w-full">
+            <Campo
+              titulo="Nome de usuário ou e-mail"
+              icone={CampoIcones.PESSOA}
+              feedback={errors.login}
+              register={register('login')}
+            />
+            <Campo
+              titulo="Senha"
+              type="password"
+              icone={CampoIcones.CADEADO}
+              feedback={errors.senha}
+              register={register('senha')}
+            />
+            <div className="w-full flex justify-center">
+              <Botao variante="enviar" type="submit" isLoading={isSubmitting}>
+                <Botao.Titulo>Entrar</Botao.Titulo>
+              </Botao>
+            </div>
+          </form>
+          <div className="flex flex-row items-center pt-2 mt-2 justify-center gap-2">
+            <p className="text-sm md:text-base text-paleta-secundaria">
+              Novo usuário?
+            </p>
+            <Link to="/registro" className="text-sm md:text-base text-blue-700">
+              Registre-se
+            </Link>
           </div>
           <Modal
             titulo={mensagem}
