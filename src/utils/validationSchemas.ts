@@ -25,7 +25,17 @@ const registroSchema = z
     path: ['senhaRepetida'],
   });
 
+const loginSchema = z.object({
+  login: z.union([
+    z.string().email('Endereço de e-mail ou nome de usuário inválido'),
+    z.string().nonempty('Nome de usuário ou endereço de e-mail é obrigatório'),
+  ]),
+  senha: z.string().nonempty('Senha é obrigatória'),
+});
+
+type TFormLoginSchema = z.infer<typeof loginSchema>;
+
 type TFormRegistroSchema = z.infer<typeof registroSchema>;
 
-export { registroSchema };
-export type { TFormRegistroSchema };
+export { registroSchema, loginSchema };
+export type { TFormRegistroSchema, TFormLoginSchema };
