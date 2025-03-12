@@ -1,8 +1,11 @@
+import adicionarImagem from '@/assets/adicionarImagem.svg';
+import alterarFoto from '@/assets/alterarFoto.svg';
 import aviso from '@/assets/aviso.svg';
 import cadeado from '@/assets/cadeado.svg';
 import email from '@/assets/email.svg';
 import imovelPadrao from '@/assets/imovelPadrao.svg';
 import informacao from '@/assets/informacao.svg';
+import lixeira from '@/assets/lixeira.svg';
 import logo from '@/assets/logo.svg';
 import lupa from '@/assets/lupa.svg';
 import pessoa from '@/assets/pessoa.svg';
@@ -16,11 +19,14 @@ import usuarioPadrao from '@/assets/usuarioPadrao.svg';
 import X from '@/assets/x.svg';
 
 export const icones = {
+  adicionarImagem,
+  alterarFoto,
   aviso,
   cadeado,
   email,
   imovelPadrao,
   informacao,
+  lixeira,
   logo,
   lupa,
   pessoa,

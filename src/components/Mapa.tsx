@@ -204,10 +204,8 @@ function Mapa({
         Math.abs(centro.lng - localizacao.longitude) >
       diferencaMinima
     ) {
-      console.log('mudou de região');
       definirLocalizacao({ latitude: centro.lat, longitude: centro.lng });
     }
-    console.log('não mudou de região');
   }
 
   function toqueNoMapa(centro: LatLng) {
