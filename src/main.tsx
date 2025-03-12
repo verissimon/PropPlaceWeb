@@ -9,6 +9,7 @@ import { Perfil } from '@/pages/perfil/Perfil';
 
 import { SessionProvider } from './context/authContext';
 import { Login } from './pages/autenticacao/Login';
+import NotFound from './pages/NotFound';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -21,8 +22,9 @@ createRoot(document.getElementById('root')!).render(
             <Route path="registro" element={<Registro />} />
             <Route path="login" element={<Login />} />
           </Route>
-          
+
           <Route path="/perfil/:id" element={<Perfil />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </SessionProvider>
