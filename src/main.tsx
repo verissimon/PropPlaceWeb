@@ -14,27 +14,30 @@ import NotFound from './pages/NotFound';
 import { Pesquisa } from './pages/pesquisa/Pesquisa';
 import { PaginaMapa } from './pages/mapa/PaginaMapa';
 import { ImovelInfo } from './pages/imovel/ImovelInfo';
+import { DadosProvider } from './context/dadosContext';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <SessionProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<App />} />
+    <DadosProvider>
+      <SessionProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route index element={<App />} />
 
-          <Route element={<AuthLayout />}>
-            <Route path="registro" element={<Registro />} />
-            <Route path="login" element={<Login />} />
-          </Route>
+            <Route element={<AuthLayout />}>
+              <Route path="registro" element={<Registro />} />
+              <Route path="login" element={<Login />} />
+            </Route>
 
-          <Route path="/perfil/:id" element={<Perfil />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/pesquisa" element={<Pesquisa />} />
-          <Route path="/mapa" element={<PaginaMapa />} />
-          <Route path="/imovel/editar" element={<EditarImovel />} />
-          <Route path="/imovel/:id" element={<ImovelInfo />} />
-        </Routes>
-      </BrowserRouter>
-    </SessionProvider>
+            <Route path="/perfil/:id" element={<Perfil />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/pesquisa" element={<Pesquisa />} />
+            <Route path="/mapa" element={<PaginaMapa />} />
+            <Route path="/imovel/editar" element={<EditarImovel />} />
+            <Route path="/imovel/:id" element={<ImovelInfo />} />
+          </Routes>
+        </BrowserRouter>
+      </SessionProvider>
+    </DadosProvider>
   </StrictMode>
 );
