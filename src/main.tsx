@@ -18,26 +18,25 @@ import { DadosProvider } from './context/dadosContext';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <DadosProvider>
-      <SessionProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route index element={<App />} />
+    <SessionProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<App />} />
 
-            <Route element={<AuthLayout />}>
-              <Route path="registro" element={<Registro />} />
-              <Route path="login" element={<Login />} />
-            </Route>
-
+          <Route element={<AuthLayout />}>
+            <Route path="registro" element={<Registro />} />
+            <Route path="login" element={<Login />} />
+          </Route>
+          <DadosProvider>
             <Route path="/perfil/:id" element={<Perfil />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/pesquisa" element={<Pesquisa />} />
             <Route path="/mapa" element={<PaginaMapa />} />
             <Route path="/imovel/editar" element={<EditarImovel />} />
             <Route path="/imovel/:id" element={<ImovelInfo />} />
-          </Routes>
-        </BrowserRouter>
-      </SessionProvider>
-    </DadosProvider>
+          </DadosProvider>
+        </Routes>
+      </BrowserRouter>
+    </SessionProvider>
   </StrictMode>
 );
