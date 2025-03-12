@@ -5,18 +5,20 @@ interface ImovelPropriedades {
   id: string;
   imagem: string;
   nome: string;
-  endereco: string;
   preco: number;
+  endereco?: string;
   disponivel?: boolean;
+  detalhar?: boolean;
 }
 
 function Imovel({
   id,
   imagem,
   nome,
-  endereco,
   preco,
+  endereco,
   disponivel,
+  detalhar = true,
 }: ImovelPropriedades) {
   const navegar = useNavigate();
 
@@ -30,7 +32,11 @@ function Imovel({
 
       <div className="flex flex-col justify-between overflow-hidden w-full h-auto">
         <span className="text-t16 font-bold truncate md:text-t20">{nome}</span>
-        <span className="text-t16 truncate md:text-t20">{endereco}</span>
+
+        {endereco && (
+          <span className="text-t16 truncate md:text-t20">{endereco}</span>
+        )}
+
         <span className="text-t16 font-medium md:text-t20">
           {preco.toLocaleString('pt-BR', {
             style: 'currency',
@@ -52,14 +58,16 @@ function Imovel({
             </span>
           </div>
 
-          <div
-            className="cursor-pointer overflow-hidden"
-            onClick={() => navegar('/imoveis/' + id)}
-          >
-            <span className="text-t14 text-paleta-auxiliar underline decoration-paleta-auxiliar truncate md:text-t16">
-              Ver mais
-            </span>
-          </div>
+          {detalhar && (
+            <div
+              className="cursor-pointer overflow-hidden"
+              onClick={() => navegar('/imoveis/' + id)}
+            >
+              <span className="text-t14 text-paleta-auxiliar underline decoration-paleta-auxiliar truncate md:text-t16">
+                Ver mais
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </div>

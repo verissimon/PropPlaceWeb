@@ -7,18 +7,16 @@ interface ListaSuspensaPropriedades {
   opcoes: string[];
   aoMudar: (valor: number) => void;
   titulo?: string;
-  valorInicial?: number;
+  valor?: number;
 }
 
 function ListaSuspensa({
   opcoes,
   aoMudar,
   titulo,
-  valorInicial,
+  valor,
 }: ListaSuspensaPropriedades) {
-  const [opcao, definirOpcao] = useState(
-    valorInicial != null ? valorInicial : -1
-  );
+  const [opcao, definirOpcao] = useState(valor != null ? valor : -1);
   const [opcoesVisiveis, definirOpcoesVisiveis] = useState(false);
   const [feedbackVisivel, definirFeedbackVisivel] = useState(false);
 
@@ -69,11 +67,11 @@ function ListaSuspensa({
         </div>
 
         {opcoesVisiveis && (
-          <div className="absolute end-0 bg-paleta-fundo border-[2px] border-paleta-auxiliar rounded-xl w-full z-2 p-6 md:p-8">
+          <div className="absolute end-0 bg-paleta-fundo border-[2px] border-paleta-auxiliar rounded-xl w-full z-10 p-6 md:p-8">
             <Selecao
               opcoes={opcoes}
               aoMudar={mudarOpcao}
-              valorInicial={opcao != null ? opcao : valorInicial}
+              valorInicial={opcao != null ? opcao : valor}
             />
           </div>
         )}

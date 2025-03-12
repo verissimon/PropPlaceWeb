@@ -80,7 +80,7 @@ function Mapa({
       // TODO: substituir por requisição a API
       const latitude = localizacao.latitude;
       const longitude = localizacao.longitude;
-      const imoveis = [
+      const imoveisMock = [
         {
           id: '1',
           nome: 'Exemplo1',
@@ -115,11 +115,14 @@ function Mapa({
           imagens: [{ nomeImagem: icones.pinImovelIndisponivel }],
         },
       ];
-      definirImoveis(imoveis);
+      definirImoveis(imoveisMock);
     })();
   }, [localizacao, realizarRequisicoes]);
 
   function construirMarcadorImovel() {
+    const larguraDaTela = screen.width;
+    const responsivo = 768;
+
     return (
       <>
         {imoveis.map((imovel, indice) => {
@@ -142,7 +145,7 @@ function Mapa({
               }
               title={imovel.nome}
             >
-              <Popup>
+              <Popup minWidth={larguraDaTela < responsivo ? 280 : 480}>
                 <div
                   className="cursor-pointer"
                   onClick={() => navegar('/imoveis/' + imovel.id)}
@@ -153,7 +156,7 @@ function Mapa({
                     imagem={imovel.imagens[0].nomeImagem}
                     preco={imovel.preco}
                     disponivel={imovel.disponivel}
-                    endereco="TODO: formatar de coord pra end"
+                    detalhar={false}
                   />
                 </div>
               </Popup>
@@ -204,10 +207,8 @@ function Mapa({
         Math.abs(centro.lng - localizacao.longitude) >
       diferencaMinima
     ) {
-      console.log('mudou de região');
       definirLocalizacao({ latitude: centro.lat, longitude: centro.lng });
     }
-    console.log('não mudou de região');
   }
 
   function toqueNoMapa(centro: LatLng) {
@@ -240,7 +241,7 @@ function Mapa({
   return (
     <MapContainer
       center={[0, 0]}
-      zoom={13}
+      zoom={15}
       scrollWheelZoom
       className="w-full h-full"
     >
