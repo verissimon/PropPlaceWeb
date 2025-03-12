@@ -11,7 +11,7 @@ function ImovelInfo() {
   const [modal, setModal] = useState(false);
 
   const dono = {
-    id: '2',
+    id: '1',
   };
   const imovel = {
     id: '2',
@@ -33,12 +33,12 @@ function ImovelInfo() {
         </span>
       </div>
 
-      <div className="w-[80%] my-8 justify-self-center flex gap-14">
+      <div className="w-[80%] my-8 justify-self-center items-center flex flex-col gap-14 md:flex-col lg:flex-row">
         <img
           className="w-[400px] aspect-square flex-shrink-0 border rounded-md border-paleta-secundaria"
           src={imovel.imagem}
         />
-        <div className="flex flex-row flex-wrap items-center content-center gap-6">
+        <div className="flex flex-row flex-wrap items-center content-center gap-6 md:justify-center">
           <img
             className="w-28 aspect-square border border-paleta-secundaria rounded-md"
             src={imovel.imagem}
@@ -83,8 +83,8 @@ function ImovelInfo() {
       </div>
 
       <div
-        className="w-[95%] flex gap-10 justify-self-center 
-            text-paleta-secundaria p-0 m-0 pb-10"
+        className="w-[90%] flex flex-col gap-10 justify-self-center 
+            text-paleta-secundaria p-0 m-0 pb-10 md:flex-row"
       >
         <div className="text-t30 shrink grow-2">
           <div>
@@ -93,7 +93,7 @@ function ImovelInfo() {
             <Separador texto={''}></Separador>
           </div>
 
-          <div className="flex justify-between items-center my-4">
+          <div className="flex justify-between items-center my-4 md:flex-col lg:flex-row">
             <p className="text-t40">
               {imovel.preco.toLocaleString('pt-BR', {
                 style: 'currency',
@@ -106,9 +106,11 @@ function ImovelInfo() {
           <p>{imovel.descricao}</p>
         </div>
 
-        <div className="min-w-80 grow-6 flex flex-col gap-10">
-          <div className="w-full flex-1 relative">
-            <Mapa />
+        <div className="min-w-80 grow-6 flex flex-col gap-10 min-h-0">
+          <div className="w-full flex-1 relative min-h-[300px]">
+            <div className="absolute inset-0">
+              <Mapa />
+            </div>
             <a className="absolute bottom-4 left-4 text-paleta-secundaria underline decoration-paleta-secundaria hover:text-paleta-secundaria hover:no-underline hover:cursor-pointer">
               Ver no mapa
             </a>
