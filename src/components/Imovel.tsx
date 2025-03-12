@@ -61,7 +61,7 @@ function Imovel({
           {detalhar && (
             <div
               className="cursor-pointer overflow-hidden"
-              onClick={() => navegar('/imoveis/' + id)}
+              onClick={() => navegar('/imovel/' + id)}
             >
               <span className="text-t14 text-paleta-auxiliar underline decoration-paleta-auxiliar truncate md:text-t16">
                 Ver mais

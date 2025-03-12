@@ -54,4 +54,8 @@ function construirModeloImoveisMapa(imoveis: ImovelDTO[]): ImovelDTO[] {
   return imoveis.map(formataImagemImovel);
 }
 
-export { construirModeloUsuarioPerfil, construirModeloImoveisMapa };
+export {
+  organizaImoveis,
+  construirModeloUsuarioPerfil,
+  construirModeloImoveisMapa,
+};
