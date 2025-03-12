@@ -6,6 +6,7 @@ import App from '@/pages/App.tsx';
 import { Registro } from '@/pages/autenticacao/Registro';
 import AuthLayout from '@/pages/layouts/AuthLayout';
 import { Perfil } from '@/pages/perfil/Perfil';
+import { EditarImovel } from '@/pages/imovel/EditarImovel';
 
 import { SessionProvider } from './context/authContext';
 import { Login } from './pages/autenticacao/Login';
@@ -25,6 +26,7 @@ createRoot(document.getElementById('root')!).render(
 
           <Route path="/perfil/:id" element={<Perfil />} />
           <Route path="/mapa" element={<PaginaMapa />} />
+          <Route path="/imovel/editar" element={<EditarImovel />} />
         </Routes>
       </BrowserRouter>
     </SessionProvider>

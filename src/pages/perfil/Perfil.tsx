@@ -9,12 +9,8 @@ import { SeletorImagem } from '@/components/SeletorImagem';
 import { Separador } from '@/components/Separador';
 import { ImovelDTO, ImovelEnderecado } from '@/models/Imovel';
 import { UsuarioDTO } from '@/models/Usuario';
+import { icones } from '@/utils/Icones';
 import { perfilSchema, TFormPerfilSchema } from '@/utils/validationSchemas';
-
-// TODO: substituir pelo util icones
-import usuarioPadrao from '@/assets/usuarioPadrao.svg';
-import alterarFoto from '@/assets/alterarFoto.svg';
-import lupa from '@/assets/lupa.svg';
 
 function Perfil() {
   const [usuario, definirUsuario] = useState<UsuarioDTO>();
@@ -54,7 +50,7 @@ function Perfil() {
           descricao: '',
           disponivel: true,
           id: '1',
-          imagens: [{ nomeImagem: usuarioPadrao }],
+          imagens: [{ nomeImagem: icones.usuarioPadrao }],
           latitude: -6.9199,
           longitude: -68.5641,
           nome: 'Imóvel1',
@@ -67,7 +63,7 @@ function Perfil() {
           descricao: '',
           disponivel: false,
           id: '2',
-          imagens: [{ nomeImagem: alterarFoto }],
+          imagens: [{ nomeImagem: icones.alterarFoto }],
           latitude: -6.9189,
           longitude: -68.5651,
           nome: 'Imóvel2',
@@ -80,7 +76,7 @@ function Perfil() {
           descricao: '',
           disponivel: false,
           id: '3',
-          imagens: [{ nomeImagem: alterarFoto }],
+          imagens: [{ nomeImagem: icones.alterarFoto }],
           latitude: -6.9179,
           longitude: -68.5661,
           nome: 'Imóvel3',
@@ -93,7 +89,7 @@ function Perfil() {
       const resposta: UsuarioDTO = {
         email: 'email@email.com',
         id: '1',
-        imagem: { nomeImagem: lupa },
+        imagem: { nomeImagem: icones.lupa },
         imoveis: respostaImoveis,
         nome: 'Pessoa',
         telefone: '99999999999',
@@ -127,14 +123,14 @@ function Perfil() {
       <div className="flex flex-row justify-center items-center gap-10 overflow-hidden">
         <div className="relative flex-shrink-0">
           <img
-            src={imagem || usuario?.imagem.nomeImagem || usuarioPadrao}
+            src={imagem || usuario?.imagem.nomeImagem || icones.usuarioPadrao}
             alt="Foto de NOME DA PESSOA"
             className="border border-paleta-secundaria rounded-full w-20 aspect-square md:w-[120px]"
           />
           {editar && (
             <>
               <img
-                src={alterarFoto}
+                src={icones.alterarFoto}
                 alt="Alterar foto"
                 className="absolute top-0 left-0 rounded-full w-20 aspect-square md:w-[120px]"
               />

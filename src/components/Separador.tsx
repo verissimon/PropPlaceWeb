@@ -64,10 +64,15 @@ function Icone({ icone, children: texto }: IconePropriedades) {
   }
 
   return (
-    <div onClick={aoApertar} onMouseOver={aoPassar} onMouseLeave={aoSair}>
+    <div
+      className="relative"
+      onClick={aoApertar}
+      onMouseOver={aoPassar}
+      onMouseLeave={aoSair}
+    >
       <Dica
         visivel={dicaVisivel}
-        posicionamento="end-0"
+        posicionamento="right-0"
         estilo="w-[50vw] min-w-[16rem] max-w-lg"
       >
         <Dica.Texto>{texto}</Dica.Texto>
