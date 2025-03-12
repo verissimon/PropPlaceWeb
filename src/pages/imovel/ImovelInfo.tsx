@@ -2,10 +2,10 @@ import { Botao } from '@/components/Botao';
 import { Cabecalho } from '@/components/Cabecalho';
 import { Separador } from '@/components/Separador';
 import { Usuario } from '@/components/Usuario';
-import imovelPadrao from '@/assets/imovelPadrao.svg';
 import { Mapa } from '@/components/Mapa';
 import { Modal } from '@/components/Modal';
 import { useState } from 'react';
+import { icones } from '@/utils/Icones';
 
 function ImovelInfo() {
   const [modal, setModal] = useState(false);
@@ -15,7 +15,7 @@ function ImovelInfo() {
   };
   const imovel = {
     id: '2',
-    imagem: imovelPadrao,
+    imagem: icones.imovelPadrao,
     nome: 'apt',
     endereco: 'rua',
     preco: 100.0,
