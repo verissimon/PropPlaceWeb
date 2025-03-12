@@ -27,7 +27,7 @@ function ImovelInfo() {
   return (
     <>
       <Cabecalho></Cabecalho>
-      <div className="mt-32 w-[95%] grid justify-self-center">
+      <div className="pt-32 w-[95%] grid justify-self-center">
         <span className="justify-self-end">
           <Usuario id={''} nome={'Mari'} reverso />
         </span>
@@ -84,7 +84,7 @@ function ImovelInfo() {
 
       <div
         className="w-[95%] flex gap-10 justify-self-center 
-            text-paleta-secundaria p-0 m-0 mb-10"
+            text-paleta-secundaria p-0 m-0 pb-10"
       >
         <div className="text-t30 shrink grow-2">
           <div>
@@ -94,7 +94,12 @@ function ImovelInfo() {
           </div>
 
           <div className="flex justify-between items-center my-4">
-            <p className="text-t40">R${imovel.preco}</p>
+            <p className="text-t40">
+              {imovel.preco.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
+            </p>
             <p className="h-fit">Max. pessoas: {imovel.max}</p>
           </div>
 
@@ -109,13 +114,13 @@ function ImovelInfo() {
             </a>
           </div>
 
-          {dono.id === imovel.id ? (
+          {dono.id !== imovel.id ? (
             <Botao
               className="w-full justify-center
                         h-fit hover:border-0 hover:shadow-inner"
               variante="enviar"
             >
-              Alugar
+              <Botao.Titulo>Alugar</Botao.Titulo>
             </Botao>
           ) : (
             <></>
@@ -123,25 +128,25 @@ function ImovelInfo() {
         </div>
       </div>
 
-      {dono.id === imovel.id ? (
+      {dono.id !== imovel.id ? (
         <></>
       ) : (
-        <div className="w-[95%] flex justify-around gap-2 mb-10">
+        <div className="w-[95%] flex justify-around gap-2 pb-10">
           <Botao
             className="w-2/5 justify-center
-                        h-fit hover:border-0 hover:shadow-inner"
+                      hover:border-0 hover:shadow-inner"
             variante="generico"
           >
-            Editar
+            <Botao.Titulo>Editar</Botao.Titulo>
           </Botao>
 
           <Botao
             className="w-2/5 justify-center
-                        h-fit hover:border-0 hover:shadow-inner"
+                      hover:border-0 hover:shadow-inner"
             variante="cancelar"
             onClick={() => setModal(true)}
           >
-            Deletar
+            <Botao.Titulo>Deletar</Botao.Titulo>
           </Botao>
         </div>
       )}
