@@ -36,7 +36,7 @@ function PaginaMapa() {
           onChange={evento => definirBusca(evento.target.value)}
         />
 
-        <div className="grow rounded-md w-full overflow-hidden">
+        <div className="grow rounded-md w-full min-h-[400px] overflow-hidden">
           <Mapa aoMudar={definirCoordenadas} centro={centro} marcarToque />
         </div>
 
