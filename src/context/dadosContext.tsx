@@ -34,7 +34,7 @@ interface ImoveisContext {
 const DadosContext = createContext<UsuariosContext & ImoveisContext>({
   todosUsuarios: [],
   todosImoveis: [],
-  atualizaImovel: (idImovel = '') => {},
+  atualizaImovel: (_idImovel = '') => {},
   carregandoUsuarios: false,
   carregandoImoveis: false,
   excluirImovel: async () => {},
