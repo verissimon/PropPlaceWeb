@@ -20,6 +20,7 @@ export default {
         t40: '40px',
         t36: '36px',
         t32: '32px',
+        t30: '30px',
         t28: '28px',
         t24: '24px',
         t20: '20px',
