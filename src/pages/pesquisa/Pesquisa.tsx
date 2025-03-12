@@ -10,7 +10,7 @@ import { cores } from '@/constants/cores';
 import { icones } from '@/utils/Icones';
 import { useState } from 'react';
 
-function Busca() {
+function Pesquisa() {
   const [pressed, setPressed] = useState<number>(0);
   const [modalImovel, defineModalImovel] = useState(false);
   const [modalUser, defineModalUser] = useState(false);
@@ -32,7 +32,7 @@ function Busca() {
       <Cabecalho></Cabecalho>
 
       <div className="w-[95%] pt-32 justify-self-center">
-        <div className="flex  cursor-pointer">
+        <div className="flex cursor-pointer">
           <Campo
             className="placeholder-paleta-secundaria bg-paleta-fundo"
             placeholder="Pesquisar..."
@@ -51,17 +51,19 @@ function Busca() {
                   defineModalImovel(false);
                 }}
               >
-                <Selecao
-                  opcoes={[
-                    'Apartamento',
-                    'Casa',
-                    'Kitnet',
-                    'Estúdio',
-                    'República',
-                    'Todos',
-                  ]}
-                  aoMudar={() => {}}
-                />
+                <div className="w-full">
+                  <Selecao
+                    opcoes={[
+                      'Apartamento',
+                      'Casa',
+                      'Kitnet',
+                      'Estúdio',
+                      'República',
+                      'Todos',
+                    ]}
+                    aoMudar={() => {}}
+                  />
+                </div>
 
                 <Botao
                   variante="enviar"
@@ -78,10 +80,12 @@ function Busca() {
                   defineModalUser(false);
                 }}
               >
-                <Selecao
-                  opcoes={['Inquilino', 'Proprietário', 'Todos']}
-                  aoMudar={() => {}}
-                />
+                <div className="w-full">
+                  <Selecao
+                    opcoes={['Inquilino', 'Proprietário', 'Todos']}
+                    aoMudar={() => {}}
+                  />
+                </div>
 
                 <Botao variante="enviar" onClick={() => defineModalUser(false)}>
                   Confirmar
@@ -149,4 +153,4 @@ function Busca() {
   );
 }
 
-export { Busca };
+export { Pesquisa };
