@@ -38,7 +38,7 @@ function ImovelInfo() {
           className="w-[400px] aspect-square flex-shrink-0 border rounded-md border-paleta-secundaria"
           src={imovel.imagem}
         />
-        <div className="flex flex-row flex-wrap items-center content-center gap-6 md:justify-center">
+        <div className="flex flex-row flex-wrap items-center justify-center content-center gap-6">
           <img
             className="w-28 aspect-square border border-paleta-secundaria rounded-md"
             src={imovel.imagem}
