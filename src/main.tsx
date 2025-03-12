@@ -9,6 +9,7 @@ import { Perfil } from '@/pages/perfil/Perfil';
 
 import { SessionProvider } from './context/authContext';
 import { Login } from './pages/autenticacao/Login';
+import { Pesquisa } from './pages/pesquisa/Pesquisa';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -21,8 +22,10 @@ createRoot(document.getElementById('root')!).render(
             <Route path="registro" element={<Registro />} />
             <Route path="login" element={<Login />} />
           </Route>
-          
+
           <Route path="/perfil/:id" element={<Perfil />} />
+
+          <Route path="/pesquisa" element={<Pesquisa />} />
         </Routes>
       </BrowserRouter>
     </SessionProvider>
