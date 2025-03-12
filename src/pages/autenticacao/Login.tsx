@@ -97,6 +97,17 @@ function Login() {
               Registre-se
             </Link>
           </div>
+          <div className="flex flex-row items-center pt-2 justify-center gap-2">
+            <p className="text-sm md:text-base text-paleta-secundaria">
+              Esqueceu a senha?
+            </p>
+            <Link
+              to="/recupera-senha"
+              className="text-sm md:text-base text-blue-700"
+            >
+              Recupere-a
+            </Link>
+          </div>
           <Modal
             titulo={mensagem}
             onClose={handleFechamentoModal}

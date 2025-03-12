@@ -6,14 +6,18 @@ interface UsuarioPropriedades {
   nome: string;
   imagem?: string;
   ocupacao?: string;
+  reverso?: boolean;
 }
 
-function Usuario({ id, nome, imagem, ocupacao }: UsuarioPropriedades) {
+function Usuario({ id, nome, imagem, ocupacao, reverso }: UsuarioPropriedades) {
   const navegar = useNavigate();
 
   return (
     <div
-      className="flex flex-row items-center gap-4 w-full overflow-hidden cursor-pointer"
+      className={
+        'flex items-center gap-4 w-full overflow-hidden cursor-pointer flex-row' +
+        (reverso ? '-reverse' : '')
+      }
       onClick={() => navegar('/usuarios/' + id)}
     >
       <img
