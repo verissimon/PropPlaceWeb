@@ -49,10 +49,26 @@ const perfilSchema = z.object({
   nomeUsuario: z.string().nonempty(mensagemCampoVazio),
 });
 
+const imovelSchema = z.object({
+  nome: z.string().nonempty(mensagemCampoVazio),
+  descricao: z.string().nonempty(mensagemCampoVazio),
+  numInquilinos: z
+    .number({ coerce: true, message: 'Insira apenas números' })
+    .min(1, 'Número máximo de pessoas inválido'),
+  preco: z
+    .number({ coerce: true, message: 'Insira apenas números' })
+    .min(1, 'Preço inválido'),
+});
+
 type TFormLoginSchema = z.infer<typeof loginSchema>;
 type TFormRegistroSchema = z.infer<typeof registroSchema>;
 type TFormPerfilSchema = z.infer<typeof perfilSchema>;
+type TFormImovelSchema = z.infer<typeof imovelSchema>;
 
-
-export { registroSchema, loginSchema, perfilSchema };
-export type { TFormRegistroSchema, TFormLoginSchema, TFormPerfilSchema };
+export { registroSchema, loginSchema, perfilSchema, imovelSchema };
+export type {
+  TFormRegistroSchema,
+  TFormLoginSchema,
+  TFormPerfilSchema,
+  TFormImovelSchema,
+};
