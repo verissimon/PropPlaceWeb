@@ -17,6 +17,8 @@ import seta from '@/assets/seta.svg';
 import telefone from '@/assets/telefone.svg';
 import usuarioPadrao from '@/assets/usuarioPadrao.svg';
 import X from '@/assets/x.svg';
+import filtro from '@/assets/filtro.svg';
+import filtro2 from '@/assets/filtro-2.svg';
 
 export const icones = {
   adicionarImagem,
@@ -38,6 +40,8 @@ export const icones = {
   telefone,
   usuarioPadrao,
   X,
+  filtro,
+  filtro2,
 };
 
 export enum CampoIcones {
