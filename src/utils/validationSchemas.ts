@@ -48,6 +48,7 @@ const perfilSchema = z.object({
 const esqueceuSenhaSchema = z.object({
   email: campos.email,
 });
+
 const trocaSenhaSchema = z
   .object({
     senha: campos.senha,
@@ -58,11 +59,23 @@ const trocaSenhaSchema = z
     path: ['senhaRepetida'],
   });
 
+const imovelSchema = z.object({
+  nome: z.string().nonempty(mensagemCampoVazio),
+  descricao: z.string().nonempty(mensagemCampoVazio),
+  numInquilinos: z
+    .number({ coerce: true, message: 'Insira apenas números' })
+    .min(1, 'Número máximo de pessoas inválido'),
+  preco: z
+    .number({ coerce: true, message: 'Insira apenas números' })
+    .min(1, 'Preço inválido'),
+});
+
 type TFormLoginSchema = z.infer<typeof loginSchema>;
 type TFormRegistroSchema = z.infer<typeof registroSchema>;
 type TFormPerfilSchema = z.infer<typeof perfilSchema>;
 type TEsqueceuSenhaSchema = z.infer<typeof esqueceuSenhaSchema>;
 type TTrocaSenhaSchema = z.infer<typeof trocaSenhaSchema>;
+type TFormImovelSchema = z.infer<typeof imovelSchema>;
 
 export {
   registroSchema,
@@ -70,11 +83,14 @@ export {
   perfilSchema,
   esqueceuSenhaSchema,
   trocaSenhaSchema,
+  imovelSchema
 };
+
 export type {
   TFormRegistroSchema,
   TFormLoginSchema,
   TFormPerfilSchema,
   TEsqueceuSenhaSchema,
   TTrocaSenhaSchema,
+  TFormImovelSchema,
 };
