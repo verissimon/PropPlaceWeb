@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router';
-
-import logo from '@/assets/logo.svg';
-import usuarioPadrao from '@/assets/usuarioPadrao.svg';
-import seta from '@/assets/seta.svg';
+import { icones } from '@/utils/Icones';
 
 interface Item {
   nome?: string;
@@ -75,7 +72,7 @@ function Cabecalho() {
     <header className="flex flex-row justify-between items-center fixed z-50 bg-paleta-primaria rounded-b-3xl w-full top-0 px-6 py-2 md:px-20">
       <div className="flex flex-row items-center gap-2 md:gap-4">
         <img
-          src={logo}
+          src={icones.logo}
           alt="Logo do PropPlace"
           className="w-16 aspect-square flex-shrink-0 md:w-20"
         />
@@ -114,12 +111,12 @@ function Cabecalho() {
         >
           {/* TODO: pegar a foto do usuário para usar aqui */}
           <img
-            src={usuarioPadrao}
+            src={icones.usuarioPadrao}
             alt="Foto de perfil"
             className="border border-paleta-secundaria rounded-full w-20 aspect-square flex-shrink-0"
           />
           <img
-            src={seta}
+            src={icones.seta}
             alt="Mostrar menu de usuário"
             className="w-6 h-3 flex-shrink-0"
           />
