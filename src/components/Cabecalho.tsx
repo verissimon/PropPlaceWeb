@@ -57,7 +57,6 @@ function Cabecalho() {
 
   const menuDesktop: Item[] = [
     { nome: 'Meu perfil', pagina: '/perfil/' + usuario.userId },
-    { nome: 'Alterar senha', pagina: '/' },
     { nome: 'Sair', pagina: '/entrar', acao: usuario.deslogar },
   ];
 
