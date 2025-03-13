@@ -17,6 +17,7 @@ import { Pesquisa } from './pages/pesquisa/Pesquisa';
 import { PaginaMapa } from './pages/mapa/PaginaMapa';
 import { ImovelInfo } from './pages/imovel/ImovelInfo';
 import DadosLayout from './pages/layouts/DadosLayout';
+import { AluguelImovel } from './pages/imovel/AluguelImovel';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -38,6 +39,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/mapa" element={<PaginaMapa />} />
             <Route path="/imovel/editar" element={<EditarImovel />} />
             <Route path="/imovel/:id" element={<ImovelInfo />} />
+            <Route path="/imovel/alugar/:id" element={<AluguelImovel />} />
           </Route>
         </Routes>
       </BrowserRouter>

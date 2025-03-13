@@ -70,12 +70,42 @@ const imovelSchema = z.object({
     .min(1, 'Preço inválido'),
 });
 
+const formAluguelSchema = z.object({
+  nome: z.string().nonempty(mensagemCampoVazio),
+  telefone: z
+    .string()
+    .nonempty(mensagemCampoVazio)
+    .regex(/^\d{11}$/, 'Deve conter apenas 11 caracteres numéricos'),
+  numInquilinos: z
+    .number({ coerce: true, message: 'Insira apenas números' })
+    .min(1, 'Número máximo de pessoas inválido'),
+  dataInicioContrato: z
+    .date({
+      coerce: true,
+      required_error: 'Selecione uma data inicial',
+      message: 'Data inválida!',
+    })
+    .refine(date => !isNaN(date.getTime()), {
+      message: 'Data inválida!',
+    }),
+  dataFinalContrato: z
+    .date({
+      coerce: true,
+      required_error: 'Selecione uma data final',
+      message: 'Data inválida!',
+    })
+    .refine(date => !isNaN(date.getTime()), {
+      message: 'Data inválida!',
+    }),
+});
+
 type TFormLoginSchema = z.infer<typeof loginSchema>;
 type TFormRegistroSchema = z.infer<typeof registroSchema>;
 type TFormPerfilSchema = z.infer<typeof perfilSchema>;
 type TEsqueceuSenhaSchema = z.infer<typeof esqueceuSenhaSchema>;
 type TTrocaSenhaSchema = z.infer<typeof trocaSenhaSchema>;
 type TFormImovelSchema = z.infer<typeof imovelSchema>;
+type TFormAluguelSchema = z.infer<typeof formAluguelSchema>;
 
 export {
   registroSchema,
@@ -84,6 +114,7 @@ export {
   esqueceuSenhaSchema,
   trocaSenhaSchema,
   imovelSchema,
+  formAluguelSchema,
 };
 
 export type {
@@ -93,4 +124,5 @@ export type {
   TEsqueceuSenhaSchema,
   TTrocaSenhaSchema,
   TFormImovelSchema,
+  TFormAluguelSchema,
 };
