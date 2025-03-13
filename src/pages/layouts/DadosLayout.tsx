@@ -1,8 +1,18 @@
 import { DadosProvider } from '@/context/dadosContext';
-import { Outlet } from 'react-router';
+import { useAuthContext } from '@/hooks/useAuthContext';
+import { useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router';
 
 function DadosLayout() {
-  // lógica de redirecionamento aqui
+  const navegar = useNavigate();
+  const { userId: userLogadoId } = useAuthContext();
+
+  useEffect(() => {
+    if (!userLogadoId) {
+      navegar('/login');
+    }
+  }, [userLogadoId, navegar]);
+
   return (
     <DadosProvider>
       <Outlet />
