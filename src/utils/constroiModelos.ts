@@ -1,7 +1,7 @@
 import { api, IMAGE_API_URL } from '@/api';
 import { ImovelDTO, ImovelEnderecado } from '@/models/Imovel';
 import { UsuarioDTO, UsuarioPerfil } from '@/models/Usuario';
-import { enderecarImovel } from './enderecamento';
+import { enderecarImovel, enderecarImovelCompleto } from './enderecamento';
 
 function formataImagemImovel(imovel: ImovelDTO): ImovelDTO {
   const imagens = imovel.imagens
@@ -20,6 +20,25 @@ async function organizaImoveis(imoveis: ImovelDTO[]) {
   for (const imovel of imoveis) {
     const imovelEnderecado = await enderecarImovel(imovel);
     const imagens = formataImagemImovel(imovel).imagens;
+
+    imoveisEnderecados.push({ ...imovelEnderecado, imagens });
+  }
+
+  return imoveisEnderecados;
+}
+
+async function organizaImoveisCompletos(imoveis: ImovelDTO[]) {
+  const imoveisEnderecados: ImovelEnderecado[] = [];
+
+  for (const imovel of imoveis) {
+    const imovelEnderecado = await enderecarImovelCompleto(imovel);
+
+    const imagens = imovel.imagens
+      ?.filter(imagem => imagem?.nomeImagem)
+      .map(imagem => ({
+        ...imagem,
+        nomeImagem: IMAGE_API_URL + imagem.nomeImagem,
+      }));
 
     imoveisEnderecados.push({ ...imovelEnderecado, imagens });
   }
@@ -57,5 +76,6 @@ function construirModeloImoveisMapa(imoveis: ImovelDTO[]): ImovelDTO[] {
 export {
   organizaImoveis,
   construirModeloUsuarioPerfil,
+  organizaImoveisCompletos,
   construirModeloImoveisMapa,
 };

@@ -5,7 +5,10 @@ import { createContext, useEffect, useState } from 'react';
 import { api } from '../api';
 import { UsuarioDTO } from '@/models/Usuario';
 import { ImovelDTO, ImovelEnderecado } from '@/models/Imovel';
-import { organizaImoveis } from '@/utils/constroiModelos';
+import {
+  organizaImoveis,
+  organizaImoveisCompletos,
+} from '@/utils/constroiModelos';
 import { useAuthContext } from '@/hooks/useAuthContext';
 import { pegaStatusDeErro } from '@/utils/pegaStatusDeErro';
 import { enderecarImovel } from '@/utils/enderecamento';
@@ -26,6 +29,7 @@ interface UsuariosContext {
 
 interface ImoveisContext {
   todosImoveis: ImovelEnderecado[];
+  todosImoveisCompletos: ImovelEnderecado[];
   atualizaImovel: (idImovel: string) => void;
   carregandoImoveis: boolean;
   excluirImovel: (id: string) => Promise<void>;
@@ -34,6 +38,7 @@ interface ImoveisContext {
 const DadosContext = createContext<UsuariosContext & ImoveisContext>({
   todosUsuarios: [],
   todosImoveis: [],
+  todosImoveisCompletos: [],
   atualizaImovel: (_idImovel = '') => {},
   carregandoUsuarios: false,
   carregandoImoveis: false,
@@ -50,6 +55,9 @@ function DadosProvider({ children }: IProps) {
   const [carregandoImoveis, setCarregandoImoveis] = useState<boolean>(false);
   const [todosUsuarios, setTodosUsuarios] = useState<UsuarioDTO[]>([]);
   const [todosImoveis, setTodosImoveis] = useState<ImovelEnderecado[]>([]);
+  const [todosImoveisCompletos, setTodosImoveisCompletos] = useState<
+    ImovelEnderecado[]
+  >([]);
   const { token, deslogar } = useAuthContext();
 
   useEffect(() => {
@@ -59,8 +67,11 @@ function DadosProvider({ children }: IProps) {
         const token = localStorage.getItem('auth.token');
         api.defaults.headers.common.Authorization = `Bearer ${token}`;
         const respostaImoveis = await api.get<ImovelDTO[]>('/imoveis');
-        console.log(respostaImoveis.data);
         const imoveisComEndereco = await organizaImoveis(respostaImoveis.data);
+        const imoveisComEnderecoCompleto = await organizaImoveisCompletos(
+          respostaImoveis.data
+        );
+        setTodosImoveisCompletos(imoveisComEnderecoCompleto);
         setTodosImoveis(imoveisComEndereco);
       } catch (error) {
         console.error('Erro ao carregar imóveis: ', error);
@@ -156,6 +167,7 @@ function DadosProvider({ children }: IProps) {
         carregandoUsuarios,
         carregandoImoveis,
         todosImoveis,
+        todosImoveisCompletos,
         excluirImovel,
         enviaEmail,
         atualizaImovel,
