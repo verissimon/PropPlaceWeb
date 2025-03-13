@@ -14,10 +14,8 @@ function Usuario({ id, nome, imagem, ocupacao, reverso }: UsuarioPropriedades) {
 
   return (
     <div
-      className={
-        'flex items-center gap-4 w-full overflow-hidden cursor-pointer flex-row' +
-        (reverso ? '-reverse' : '')
-      }
+      className="flex items-center gap-4 w-full overflow-hidden cursor-pointer flex-row"
+      style={{ flexDirection: reverso ? 'row-reverse' : 'row' }}
       onClick={() => navegar('/usuarios/' + id)}
     >
       <img
@@ -26,7 +24,10 @@ function Usuario({ id, nome, imagem, ocupacao, reverso }: UsuarioPropriedades) {
         className="border border-paleta-secundaria w-20 aspect-square rounded-full flex-shrink-0 md:w-[100px]"
       />
 
-      <div className="flex flex-col gap-4 text-paleta-secundaria text-t16 overflow-hidden md:text-t20">
+      <div
+        className="flex flex-col gap-4 text-paleta-secundaria text-t16 overflow-hidden md:text-t20"
+        style={{ textAlign: reverso ? 'right' : 'left' }}
+      >
         <p className="font-bold truncate">{nome}</p>
         {ocupacao && <p>{ocupacao}</p>}
       </div>
