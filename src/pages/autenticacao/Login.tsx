@@ -71,12 +71,18 @@ function Login() {
           </h2>
           <form onSubmit={handleSubmit(enviar)} className="space-y-4 w-full">
             <Campo
+              labelFor="login"
+              id="login"
+              name="login"
               titulo="Nome de usuário ou e-mail"
               icone={CampoIcones.PESSOA}
               feedback={errors.login}
               register={register('login')}
             />
             <Campo
+              labelFor="senha"
+              id="senha"
+              name="senha"
               titulo="Senha"
               type="password"
               icone={CampoIcones.CADEADO}

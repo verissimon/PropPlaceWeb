@@ -201,6 +201,9 @@ function Pesquisa() {
       <div className="w-[95%] pt-32 justify-self-center">
         <div className="flex">
           <Campo
+            labelFor="pesquisar"
+            id="pesquisar"
+            name="pesquisar"
             className="placeholder-paleta-secundaria w-full text-paleta-secundaria bg-paleta-fundo"
             placeholder="Pesquisar..."
             icone={CampoIcones.LUPA}
@@ -286,9 +289,9 @@ function Pesquisa() {
 
         <div className="flex justify-center gap-20">
           <button
-            className="text-t16 border-0 
-          border-b-2 border-transparent rounded-none focus:outline-none 
-          hover:none hover:border-b-2 text-paleta-secundaria 
+            className="text-t16 border-0
+          border-b-2 border-transparent rounded-none focus:outline-none
+          hover:none hover:border-b-2 text-paleta-secundaria
           hover:border-paleta-secundaria bg-paleta-fundo md:text-t20"
             style={buttonStyle(0)}
             onClick={() => {
@@ -301,8 +304,8 @@ function Pesquisa() {
 
           <button
             className="text-t16 border-0 border-b-2
-           border-transparent rounded-none focus:outline-none 
-           hover:none hover:border-b-2 text-paleta-secundaria 
+           border-transparent rounded-none focus:outline-none
+           hover:none hover:border-b-2 text-paleta-secundaria
            hover:border-paleta-secundaria bg-paleta-fundo md:text-t20"
             style={buttonStyle(1)}
             onClick={() => {

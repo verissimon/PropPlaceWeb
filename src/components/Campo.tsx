@@ -9,6 +9,7 @@ interface CampoPropriedades extends InputHTMLAttributes<HTMLInputElement> {
   feedback?: FieldError;
   ativo?: boolean;
   icone?: CampoIcones;
+  labelFor: string;
   register?: UseFormRegisterReturn;
 }
 
@@ -18,12 +19,16 @@ function Campo({
   feedback,
   ativo = true,
   icone,
+  labelFor,
   ...rest
 }: CampoPropriedades) {
   return (
     <div className="flex flex-col gap-2 w-full">
       {titulo && (
-        <label className="text-t16 text-paleta-secundaria font-medium mb-1 md:text-t20 md:mb-2">
+        <label
+          htmlFor={labelFor}
+          className="text-t16 text-paleta-secundaria font-medium mb-1 md:text-t20 md:mb-2"
+        >
           {titulo}
         </label>
       )}

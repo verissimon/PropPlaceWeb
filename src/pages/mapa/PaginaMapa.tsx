@@ -30,6 +30,9 @@ function PaginaMapa() {
     <div className="h-screen">
       <div className="flex flex-col items-center gap-10 w-full h-full px-6 pt-8 pb-10 md:px-20 md:pb-20">
         <Campo
+          labelFor="pesquisar"
+          id="pesquisar"
+          name="pesquisar"
           icone={CampoIcones.LUPA}
           placeholder="Pesquisar..."
           value={busca}

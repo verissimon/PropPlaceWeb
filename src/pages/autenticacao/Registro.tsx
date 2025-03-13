@@ -79,18 +79,27 @@ function Registro() {
 
       <form onSubmit={handleSubmit(enviar)} className="space-y-4 w-full">
         <Campo
+          labelFor="nome"
+          id="nome"
+          name="nome"
           titulo="Nome completo"
           icone={CampoIcones.PESSOA}
           feedback={errors.nome}
           register={register('nome')}
         />
         <Campo
+          labelFor="nome-usuario"
+          id="nome-usuario"
+          name="nome-usuario"
           titulo="Nome de usuário"
           icone={CampoIcones.PESSOA}
           feedback={errors.username}
           register={register('username')}
         />
         <Campo
+          labelFor="telefone"
+          id="telefone"
+          name="telefone"
           titulo="Telefone"
           icone={CampoIcones.TELEFONE}
           feedback={errors.telefone}
@@ -98,6 +107,9 @@ function Registro() {
           placeholder="(99) 99999-9999"
         />
         <Campo
+          labelFor="email"
+          id="email"
+          name="email"
           titulo="E-mail"
           type="email"
           icone={CampoIcones.EMAIL}
@@ -105,6 +117,9 @@ function Registro() {
           register={register('email')}
         />
         <Campo
+          labelFor="senha"
+          id="senha"
+          name="senha"
           titulo="Senha"
           type="password"
           icone={CampoIcones.CADEADO}
@@ -112,6 +127,9 @@ function Registro() {
           register={register('senha')}
         />
         <Campo
+          labelFor="confirma-senha"
+          id="confirma-senha"
+          name="confirma-senha"
           titulo="Confirmar senha"
           type="password"
           icone={CampoIcones.CADEADO}
