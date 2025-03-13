@@ -206,7 +206,7 @@ function ImovelInfo() {
               className="w-full justify-center
                         h-fit hover:border-0 hover:shadow-inner"
               variante="enviar"
-              onClick={() => navegar('/imovel/alugar')}
+              onClick={() => navegar('/imovel/alugar/' + imovel.id)}
             >
               <Botao.Titulo>Alugar</Botao.Titulo>
             </Botao>
