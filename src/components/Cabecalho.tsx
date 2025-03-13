@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router';
+import { useAuthContext } from '@/hooks/useAuthContext';
 import { icones } from '@/utils/Icones';
 
 interface Item {
@@ -52,12 +53,13 @@ function Menu({ itens, navegacao }: MenuPropriedades) {
 function Cabecalho() {
   const [mostrarMenu, definirMostrarMenu] = useState(false);
   const navegacao = useNavigate();
+  const usuario = useAuthContext();
 
   const menuDesktop: Item[] = [
-    { nome: 'Meu perfil', pagina: '/perfil' },
+    { nome: 'Meu perfil', pagina: '/perfil/' + usuario.userId },
     { nome: 'Configurações', pagina: '/configuracoes' },
     { nome: 'Alterar senha', pagina: '/' },
-    { nome: 'Sair', pagina: '/entrar', acao: () => {} },
+    { nome: 'Sair', pagina: '/entrar', acao: usuario.deslogar },
   ];
 
   const menuMovel: Item[] = [

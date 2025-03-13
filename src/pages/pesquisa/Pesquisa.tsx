@@ -349,7 +349,7 @@ function Pesquisa() {
                         id={imovel.id}
                         imagem={
                           imovel.imagens[0]
-                            ? `${IMAGE_API_URL}${imovel.imagens[0]?.nomeImagem}`
+                            ? `${imovel.imagens[0]?.nomeImagem}`
                             : icones.imovelPadrao
                         }
                         nome={imovel.nome}

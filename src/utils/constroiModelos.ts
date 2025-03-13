@@ -3,18 +3,23 @@ import { ImovelDTO, ImovelEnderecado } from '@/models/Imovel';
 import { UsuarioDTO, UsuarioPerfil } from '@/models/Usuario';
 import { enderecarImovel, enderecarImovelCompleto } from './enderecamento';
 
+function formataImagemImovel(imovel: ImovelDTO): ImovelDTO {
+  const imagens = imovel.imagens
+    ?.filter(imagem => imagem?.nomeImagem)
+    .map(imagem => ({
+      ...imagem,
+      nomeImagem: IMAGE_API_URL + imagem.nomeImagem,
+    }));
+
+  return { ...imovel, imagens };
+}
+
 async function organizaImoveis(imoveis: ImovelDTO[]) {
   const imoveisEnderecados: ImovelEnderecado[] = [];
 
   for (const imovel of imoveis) {
     const imovelEnderecado = await enderecarImovel(imovel);
-
-    const imagens = imovel.imagens
-      ?.filter(imagem => imagem?.nomeImagem)
-      .map(imagem => ({
-        ...imagem,
-        nomeImagem: IMAGE_API_URL + imagem.nomeImagem,
-      }));
+    const imagens = formataImagemImovel(imovel).imagens;
 
     imoveisEnderecados.push({ ...imovelEnderecado, imagens });
   }
@@ -64,8 +69,13 @@ async function construirModeloUsuarioPerfil(
   return { ...usuario, imoveis: imoveisEnderecados };
 }
 
+function construirModeloImoveisMapa(imoveis: ImovelDTO[]): ImovelDTO[] {
+  return imoveis.map(formataImagemImovel);
+}
+
 export {
   organizaImoveis,
   construirModeloUsuarioPerfil,
   organizaImoveisCompletos,
+  construirModeloImoveisMapa,
 };
