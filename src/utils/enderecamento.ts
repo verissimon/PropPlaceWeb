@@ -58,4 +58,20 @@ async function enderecarImovel(imovel: ImovelDTO): Promise<ImovelEnderecado> {
   return { ...imovel, endereco };
 }
 
-export { geolocalizacao, geolocalizacaoReversa, enderecarImovel };
+async function enderecarImovelCompleto(
+  imovel: ImovelDTO
+): Promise<ImovelEnderecado> {
+  const resposta = await geolocalizacaoReversa({
+    latitude: imovel.latitude,
+    longitude: imovel.longitude,
+  });
+  const endereco = resposta ? resposta.completo : '';
+  return { ...imovel, endereco };
+}
+
+export {
+  geolocalizacao,
+  geolocalizacaoReversa,
+  enderecarImovel,
+  enderecarImovelCompleto,
+};
