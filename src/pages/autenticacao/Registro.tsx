@@ -88,9 +88,9 @@ function Registro() {
           register={register('nome')}
         />
         <Campo
-          labelFor="nome-usuario"
-          id="nome-usuario"
-          name="nome-usuario"
+          labelFor="username"
+          id="username"
+          name="username"
           titulo="Nome de usuário"
           icone={CampoIcones.PESSOA}
           feedback={errors.username}
@@ -127,9 +127,9 @@ function Registro() {
           register={register('senha')}
         />
         <Campo
-          labelFor="confirma-senha"
-          id="confirma-senha"
-          name="confirma-senha"
+          labelFor="senhaRepetida"
+          id="senhaRepetida"
+          name="senhaRepetida"
           titulo="Confirmar senha"
           type="password"
           icone={CampoIcones.CADEADO}

@@ -97,9 +97,9 @@ function AluguelImovel() {
           />
 
           <Campo
-            labelFor="quantidade-pessoas"
-            id="quantidade-pessoas"
-            name="quatidade-pessoas"
+            labelFor="numInquilinos"
+            id="numInquilinos"
+            name="numInquilinos"
             titulo="Quantidade de pessoas"
             placeholder="1"
             register={registrador('numInquilinos')}
@@ -111,9 +111,9 @@ function AluguelImovel() {
           </p>
 
           <Campo
-            labelFor="data-inicial"
-            id="data-inicial"
-            name="data-inicial"
+            labelFor="dataInicioContrato"
+            id="dataInicioContrato"
+            name="dataInicioContrato"
             titulo="Data inicial"
             placeholder="01/12/0000"
             register={registrador('dataInicioContrato')}
@@ -122,9 +122,9 @@ function AluguelImovel() {
           />
 
           <Campo
-            labelFor="data-final"
-            id="data-final"
-            name="data-final"
+            labelFor="dataFinalContrato"
+            id="dataFinalContrato"
+            name="dataFinalContrato"
             titulo="Data final"
             placeholder="01/12/0000"
             register={registrador('dataFinalContrato')}
