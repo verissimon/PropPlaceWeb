@@ -201,6 +201,9 @@ function Pesquisa() {
       <div className="w-[95%] pt-32 justify-self-center">
         <div className="flex">
           <Campo
+            labelFor="pesquisar"
+            id="pesquisar"
+            name="pesquisar"
             className="placeholder-paleta-secundaria w-full text-paleta-secundaria bg-paleta-fundo"
             placeholder="Pesquisar..."
             icone={CampoIcones.LUPA}

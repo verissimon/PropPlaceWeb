@@ -266,6 +266,9 @@ function EditarImovel() {
 
           <div className="grid grid-cols-1 gap-6 w-full md:grid-cols-2 md:gap-8">
             <Campo
+              labelFor="nome"
+              id="nome"
+              name="nome"
               titulo="Nome"
               placeholder="Apartamento no edifício XPTO"
               register={registrador('nome')}
@@ -273,6 +276,9 @@ function EditarImovel() {
             />
 
             <Campo
+              labelFor="descricao"
+              id="descricao"
+              name="descricao"
               titulo="Descrição"
               placeholder="100m²: 1 sala, 1 cozinha, 1 suíte, 1 quarto, 1 banheiro, 1 área externa"
               register={registrador('descricao')}
@@ -280,6 +286,9 @@ function EditarImovel() {
             />
 
             <Campo
+              labelFor="numero-pessoas"
+              id="numero-pessoas"
+              name="numero-pessoas"
               titulo="Número máximo de pessoas"
               placeholder="4"
               register={registrador('numInquilinos')}
@@ -287,6 +296,9 @@ function EditarImovel() {
             />
 
             <Campo
+              labelFor="preco"
+              id="preco"
+              name="preco"
               titulo="Preço"
               placeholder="750"
               register={registrador('preco')}
@@ -319,6 +331,9 @@ function EditarImovel() {
           </Separador>
 
           <Campo
+            labelFor="endereco"
+            id="endereco"
+            name="endereco"
             titulo="Endereço"
             placeholder="Rua, Bairro, Cidade, Estado, País"
             icone={CampoIcones.LUPA}

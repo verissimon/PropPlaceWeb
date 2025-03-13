@@ -124,9 +124,10 @@ function Perfil() {
               src={
                 urlImagem || usuario?.imagem?.nomeImagem || icones.usuarioPadrao
               }
-              alt="Foto de NOME DA PESSOA"
+              alt={'Foto de ' + usuario?.nome}
               className="border border-paleta-secundaria rounded-full w-20 aspect-square md:w-[120px]"
             />
+
             {editar && (
               <>
                 <img
@@ -138,6 +139,7 @@ function Perfil() {
               </>
             )}
           </div>
+
           {!editar && (
             <span className="text-t28 text-paleta-secundaria font-semibold truncate md:text-t40">
               {usuario?.nome}
@@ -157,6 +159,9 @@ function Perfil() {
           <form className="flex flex-col gap-10" onSubmit={aoEnviar(enviar)}>
             <div className="grid grid-cols-1 gap-6 w-full md:grid-cols-2 md:gap-8">
               <Campo
+                labelFor="nome"
+                id="nome"
+                name="nome"
                 titulo="Nome completo"
                 ativo={editar}
                 register={registrador('nome')}
@@ -164,6 +169,9 @@ function Perfil() {
               />
 
               <Campo
+                labelFor="email"
+                id="email"
+                name="email"
                 titulo="E-mail"
                 ativo={editar}
                 register={registrador('email')}
@@ -171,6 +179,9 @@ function Perfil() {
               />
 
               <Campo
+                labelFor="telefone"
+                id="telefone"
+                name="telefone"
                 titulo="Número para contato"
                 ativo={editar}
                 register={registrador('telefone')}
@@ -179,6 +190,9 @@ function Perfil() {
 
               {eTitular && (
                 <Campo
+                  labelFor="nome-usuario"
+                  id="nome-usuario"
+                  name="nome-usuario"
                   titulo="Nome de usuário"
                   ativo={editar}
                   register={registrador('nomeUsuario')}
