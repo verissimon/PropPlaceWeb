@@ -67,22 +67,39 @@ function Perfil() {
   }, [imagem]);
 
   async function enviarImagem() {
-    // TODO: adicionar envio de imagem
+    const dados = new FormData();
+    dados.append('imagem', imagem!);
+    const configuracao = {
+      headers: {
+        'content-type': 'multipart/form-data',
+        user_id: usuarioLogado.username,
+      },
+    };
+
+    await api.put('/imagem/user', dados, configuracao).catch(erro => {
+      definirUrlImagem('');
+      definirModal(erro.message || erro);
+    });
   }
 
   async function enviar(formulario: TFormPerfilSchema) {
     const token = localStorage.getItem('auth.token');
     api.defaults.headers.common.Authorization = `Bearer ${token}`;
 
-    if (imagem) await enviarImagem();
+    if (urlImagem) await enviarImagem();
 
     const dados = { ...formulario, username: formulario.nomeUsuario };
     await api
       .put('/users/' + idUsuarioLogado, dados)
       .then(() => {
-        const usuarioAtualizado = { ...usuario, ...dados } as UsuarioPerfil;
+        const usuarioAtualizado = {
+          ...usuario,
+          ...dados,
+          imagem: { nomeImagem: urlImagem || usuario?.imagem.nomeImagem },
+        } as UsuarioPerfil;
         definirUsuario(usuarioAtualizado);
         resetar(usuarioAtualizado);
+        definirUrlImagem('');
         definirEditar(false);
       })
       .catch(erro => {

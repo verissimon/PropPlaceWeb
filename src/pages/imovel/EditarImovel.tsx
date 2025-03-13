@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { api, IMAGE_API_URL } from '@/api';
 import { Botao } from '@/components/Botao';
 import { Cabecalho } from '@/components/Cabecalho';
 import { Campo } from '@/components/Campo';
@@ -13,7 +14,6 @@ import { Separador } from '@/components/Separador';
 import { Coordenadas, ImovelDTO, ImovelEnderecado } from '@/models/Imovel';
 import { CampoIcones, icones } from '@/utils/Icones';
 import { imovelSchema, TFormImovelSchema } from '@/utils/validationSchemas';
-import { api } from '@/api';
 import { geolocalizacao } from '@/utils/enderecamento';
 
 const opcoesTipo = ['Apartamento', 'Casa', 'Estúdio', 'Kitnet', 'República'];
@@ -29,6 +29,7 @@ function EditarImovel() {
   const [imovel, definirImovel] = useState<ImovelDTO>();
   const [imagens, definirImagens] = useState<File[]>([]);
   const [urlImagens, definirUrlImagens] = useState<string[]>([]);
+  const [imagensRemovidas, definirImagensRemovidas] = useState<string[]>([]);
   const [tipo, definirTipo] = useState(0);
   const [disponibilidade, definirDisponibilidade] = useState(1);
   const [coordenadas, definirCoordenadas] = useState<Coordenadas>();
@@ -135,16 +136,49 @@ function EditarImovel() {
   }
 
   function filtrarImagem(imagemRemovida: string) {
-    // TODO: filtrar imagens salvas e adicionadas
-    const indiceImagemremovida = urlImagens.indexOf(imagemRemovida);
+    const indiceImagemRemovida = urlImagens.indexOf(imagemRemovida);
+    const imagensJaExistentes = imovel?.imagens?.length || 0;
+    const indiceArrayImagens = indiceImagemRemovida - imagensJaExistentes;
 
-    definirImagens(
-      imagens.filter((_, indice) => indice !== indiceImagemremovida)
-    );
+    if (indiceArrayImagens < 0) {
+      definirImagensRemovidas([
+        ...imagensRemovidas,
+        imovel?.imagens[indiceImagemRemovida].nomeImagem.replace(
+          IMAGE_API_URL,
+          ''
+        ) || '',
+      ]);
+
+      const imagensImovel =
+        imovel?.imagens.filter(
+          (_, indice) => indice !== indiceImagemRemovida
+        ) || [];
+      definirImovel({ ...imovel, imagens: imagensImovel } as ImovelDTO);
+    } else {
+      definirImagens(
+        imagens.filter(
+          (_, indice) => indice !== indiceImagemRemovida - imagensJaExistentes
+        )
+      );
+    }
   }
 
   async function atualizarImagens() {
-    // TODO: adicoinar atualização de imagem na API
+    for (const nomeImagem of imagensRemovidas) {
+      await api
+        .delete(`/${imovel?.id}/imagens`, { data: { nomeImagem } })
+        .catch(erro => definirModal(erro.message || erro));
+    }
+
+    if (imagens.length === 0) return;
+
+    const dados = new FormData();
+    imagens.forEach(imagem => dados.append('images', imagem));
+    const configuracao = { headers: { 'content-type': 'multipart/form-data' } };
+
+    await api
+      .post(`/${imovel?.id}/imagens`, dados, configuracao)
+      .catch(erro => definirModal(erro.message || erro));
   }
 
   async function enviar(formulario: TFormImovelSchema) {

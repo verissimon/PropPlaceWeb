@@ -286,9 +286,9 @@ function Pesquisa() {
 
         <div className="flex justify-center gap-20">
           <button
-            className="text-t16 border-0 
-          border-b-2 border-transparent rounded-none focus:outline-none 
-          hover:none hover:border-b-2 text-paleta-secundaria 
+            className="text-t16 border-0
+          border-b-2 border-transparent rounded-none focus:outline-none
+          hover:none hover:border-b-2 text-paleta-secundaria
           hover:border-paleta-secundaria bg-paleta-fundo md:text-t20"
             style={buttonStyle(0)}
             onClick={() => {
@@ -301,8 +301,8 @@ function Pesquisa() {
 
           <button
             className="text-t16 border-0 border-b-2
-           border-transparent rounded-none focus:outline-none 
-           hover:none hover:border-b-2 text-paleta-secundaria 
+           border-transparent rounded-none focus:outline-none
+           hover:none hover:border-b-2 text-paleta-secundaria
            hover:border-paleta-secundaria bg-paleta-fundo md:text-t20"
             style={buttonStyle(1)}
             onClick={() => {
@@ -346,7 +346,7 @@ function Pesquisa() {
                         id={imovel.id}
                         imagem={
                           imovel.imagens[0]
-                            ? `${IMAGE_API_URL}${imovel.imagens[0]?.nomeImagem}`
+                            ? `${imovel.imagens[0]?.nomeImagem}`
                             : icones.imovelPadrao
                         }
                         nome={imovel.nome}
