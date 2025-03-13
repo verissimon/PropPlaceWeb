@@ -99,7 +99,6 @@ function Pesquisa() {
 
   async function buscaUserTipo(tipo: string) {
     try {
-      console.log(tipo);
       setLoading(true);
       const usuariosLista = todosUsuarios;
       const usuariosList: any[] = [];

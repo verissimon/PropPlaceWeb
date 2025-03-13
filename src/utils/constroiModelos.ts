@@ -1,13 +1,32 @@
 import { api, IMAGE_API_URL } from '@/api';
 import { ImovelDTO, ImovelEnderecado } from '@/models/Imovel';
 import { UsuarioDTO, UsuarioPerfil } from '@/models/Usuario';
-import { enderecarImovel } from './enderecamento';
+import { enderecarImovel, enderecarImovelCompleto } from './enderecamento';
 
 async function organizaImoveis(imoveis: ImovelDTO[]) {
   const imoveisEnderecados: ImovelEnderecado[] = [];
 
   for (const imovel of imoveis) {
     const imovelEnderecado = await enderecarImovel(imovel);
+
+    const imagens = imovel.imagens
+      ?.filter(imagem => imagem?.nomeImagem)
+      .map(imagem => ({
+        ...imagem,
+        nomeImagem: IMAGE_API_URL + imagem.nomeImagem,
+      }));
+
+    imoveisEnderecados.push({ ...imovelEnderecado, imagens });
+  }
+
+  return imoveisEnderecados;
+}
+
+async function organizaImoveisCompletos(imoveis: ImovelDTO[]) {
+  const imoveisEnderecados: ImovelEnderecado[] = [];
+
+  for (const imovel of imoveis) {
+    const imovelEnderecado = await enderecarImovelCompleto(imovel);
 
     const imagens = imovel.imagens
       ?.filter(imagem => imagem?.nomeImagem)
@@ -45,4 +64,8 @@ async function construirModeloUsuarioPerfil(
   return { ...usuario, imoveis: imoveisEnderecados };
 }
 
-export { organizaImoveis, construirModeloUsuarioPerfil };
+export {
+  organizaImoveis,
+  construirModeloUsuarioPerfil,
+  organizaImoveisCompletos,
+};

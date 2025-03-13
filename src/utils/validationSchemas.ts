@@ -83,7 +83,7 @@ export {
   perfilSchema,
   esqueceuSenhaSchema,
   trocaSenhaSchema,
-  imovelSchema
+  imovelSchema,
 };
 
 export type {
