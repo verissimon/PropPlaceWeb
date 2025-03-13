@@ -198,7 +198,7 @@ function Pesquisa() {
     <>
       <Cabecalho></Cabecalho>
 
-      <div className="w-[95%] pt-32 justify-self-center">
+      <div className="w-[95%] pt-32 justify-self-center px-10">
         <div className="flex">
           <Campo
             labelFor="pesquisar"

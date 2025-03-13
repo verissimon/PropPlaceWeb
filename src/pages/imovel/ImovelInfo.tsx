@@ -131,7 +131,7 @@ function ImovelInfo() {
         </span>
       </div>
 
-      <div className="w-[80%] my-8 justify-self-center items-center flex flex-col gap-14 md:flex-col lg:flex-row">
+      <div className="min-w-screen px-4 my-8 justify-self-center items-center flex flex-col gap-14 md:flex-col lg:flex-row">
         {imovel.imagens.length === 0 ? (
           <div
             className="text-t20
@@ -161,8 +161,8 @@ function ImovelInfo() {
       </div>
 
       <div
-        className="w-[90%] flex flex-col gap-10 justify-self-center 
-            text-paleta-secundaria p-0 m-0 pb-10 md:flex-row"
+        className="min-w-screen flex flex-col items-center gap-10 justify-self-center px-4
+            text-paleta-secundaria pb-10 md:flex-row"
       >
         <div className="text-t30 shrink grow">
           <div>

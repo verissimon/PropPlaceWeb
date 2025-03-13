@@ -194,7 +194,7 @@ function EditarImovel() {
       const dados = {
         ...formulario,
         tipo: opcoesTipo[tipo],
-        disponivel: !disponibilidade,
+        disponivel: !!disponibilidade,
         latitude: coordenadas?.latitude,
         longitude: coordenadas?.longitude,
       };
