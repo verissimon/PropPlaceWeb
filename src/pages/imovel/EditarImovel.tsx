@@ -11,10 +11,11 @@ import { Mapa } from '@/components/Mapa';
 import { Modal } from '@/components/Modal';
 import { SeletorImagem } from '@/components/SeletorImagem';
 import { Separador } from '@/components/Separador';
+import { geolocalizacao } from '@/utils/enderecamento';
 import { Coordenadas, ImovelDTO, ImovelEnderecado } from '@/models/Imovel';
 import { CampoIcones, icones } from '@/utils/Icones';
 import { imovelSchema, TFormImovelSchema } from '@/utils/validationSchemas';
-import { geolocalizacao } from '@/utils/enderecamento';
+import { useAuthContext } from '@/hooks/useAuthContext';
 
 const opcoesTipo = ['Apartamento', 'Casa', 'Estúdio', 'Kitnet', 'República'];
 const opcoesDisponbilidade = ['Indisponível', 'Disponível'];
@@ -39,6 +40,7 @@ function EditarImovel() {
   const [modal, definirModal] = useState('');
   const navegar = useNavigate();
   const localizacao = useLocation();
+  const usuario = useAuthContext();
 
   const {
     register: registrador,
@@ -163,10 +165,10 @@ function EditarImovel() {
     }
   }
 
-  async function atualizarImagens() {
+  async function atualizarImagens(idImovel: string) {
     for (const nomeImagem of imagensRemovidas) {
       await api
-        .delete(`/${imovel?.id}/imagens`, { data: { nomeImagem } })
+        .delete(`/${idImovel}/imagens`, { data: { nomeImagem } })
         .catch(erro => definirModal(erro.message || erro));
     }
 
@@ -177,17 +179,16 @@ function EditarImovel() {
     const configuracao = { headers: { 'content-type': 'multipart/form-data' } };
 
     await api
-      .post(`/${imovel?.id}/imagens`, dados, configuracao)
+      .post(`/${idImovel}/imagens`, dados, configuracao)
       .catch(erro => definirModal(erro.message || erro));
   }
 
   async function enviar(formulario: TFormImovelSchema) {
     if (!validarValores()) return;
+    let idImovel = '';
 
     const token = localStorage.getItem('auth.token');
     api.defaults.headers.common.Authorization = `Bearer ${token}`;
-
-    await atualizarImagens();
 
     try {
       const dados = {
@@ -200,14 +201,15 @@ function EditarImovel() {
 
       if (imovel?.id) {
         await api.put('/imoveis/' + imovel.id, dados);
-        navegar('/imovel/' + imovel.id);
+        idImovel = imovel.id;
       } else {
-        const idNovoImovel = await api
+        idImovel = await api
           .post('/imoveis', dados)
           .then(resposta => resposta.data.imovel.id);
-        navegar('/imovel/' + idNovoImovel);
       }
 
+      await atualizarImagens(idImovel);
+      navegar('/perfil/' + usuario.userId);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (erro: any) {
       definirModal(erro.message || erro);
