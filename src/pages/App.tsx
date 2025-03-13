@@ -12,6 +12,7 @@ import { UsuarioDTO } from '@/models/Usuario';
 import { calcularInformacoes, numerosAleatorios } from '@/utils/calculosHome';
 import { organizaImoveis } from '@/utils/constroiModelos';
 import { icones } from '@/utils/Icones';
+import { useAuthContext } from '@/hooks/useAuthContext';
 
 function App() {
   const [imoveis, definirImoveis] = useState<ImovelEnderecado[]>();
@@ -21,6 +22,13 @@ function App() {
   }>();
   const navegar = useNavigate();
   const geolocalizacao = useGeolocalizacao();
+  const { userId: userLogadoId } = useAuthContext();
+
+  useEffect(() => {
+    if (!userLogadoId) {
+      navegar('/login');
+    }
+  }, [userLogadoId, navegar]);
 
   useEffect(() => {
     const latitude = geolocalizacao.latitude;
