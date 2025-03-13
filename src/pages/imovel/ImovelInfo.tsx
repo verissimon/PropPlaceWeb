@@ -20,7 +20,7 @@ function ImovelInfo() {
   const { userId } = useAuthContext();
   const [usuario, setUsuario] = useState<UsuarioDTO | undefined>(undefined);
   const {
-    todosImoveis,
+    todosImoveisCompletos,
     carregandoImoveis,
     excluirImovel,
     carregandoUsuarios,
@@ -39,7 +39,7 @@ function ImovelInfo() {
 
   function defineImovel() {
     setLoading(carregandoImoveis);
-    setImovel(todosImoveis.find(imovel => imovel.id === id));
+    setImovel(todosImoveisCompletos.find(imovel => imovel.id === id));
   }
 
   function defineUsuario() {
@@ -87,7 +87,13 @@ function ImovelInfo() {
   useEffect(() => {
     defineImovel();
     defineUsuario();
-  }, [carregandoImoveis, carregandoUsuarios, todosUsuarios, todosImoveis, id]);
+  }, [
+    carregandoImoveis,
+    carregandoUsuarios,
+    todosUsuarios,
+    todosImoveisCompletos,
+    id,
+  ]);
 
   useEffect(() => {
     if (usuario && imovel) {
@@ -214,7 +220,7 @@ function ImovelInfo() {
             className="w-2/5 justify-center
                     hover:border-0 hover:shadow-inner"
             variante="generico"
-            onClick={() => navegar('/imovel/editar')}
+            onClick={() => navegar('/imovel/editar', { state: { imovel } })}
           >
             <Botao.Titulo>Editar</Botao.Titulo>
           </Botao>
