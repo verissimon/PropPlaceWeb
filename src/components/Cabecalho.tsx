@@ -57,7 +57,6 @@ function Cabecalho() {
 
   const menuDesktop: Item[] = [
     { nome: 'Meu perfil', pagina: '/perfil/' + usuario.userId },
-    { nome: 'Configurações', pagina: '/configuracoes' },
     { nome: 'Alterar senha', pagina: '/' },
     { nome: 'Sair', pagina: '/entrar', acao: usuario.deslogar },
   ];
@@ -111,7 +110,6 @@ function Cabecalho() {
           className="flex flex-row items-center gap-2 cursor-pointer"
           onClick={() => definirMostrarMenu(!mostrarMenu)}
         >
-          {/* TODO: pegar a foto do usuário para usar aqui */}
           <img
             src={icones.usuarioPadrao}
             alt="Foto de perfil"
