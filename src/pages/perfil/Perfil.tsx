@@ -190,9 +190,9 @@ function Perfil() {
 
               {eTitular && (
                 <Campo
-                  labelFor="nome-usuario"
-                  id="nome-usuario"
-                  name="nome-usuario"
+                  labelFor="nomeUsuario"
+                  id="nomeUsuario"
+                  name="nomeUsuario"
                   titulo="Nome de usuário"
                   ativo={editar}
                   register={registrador('nomeUsuario')}

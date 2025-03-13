@@ -286,9 +286,9 @@ function EditarImovel() {
             />
 
             <Campo
-              labelFor="numero-pessoas"
-              id="numero-pessoas"
-              name="numero-pessoas"
+              labelFor="numInquilinos"
+              id="numInquilinos"
+              name="numInquilinos"
               titulo="Número máximo de pessoas"
               placeholder="4"
               register={registrador('numInquilinos')}
