@@ -1,129 +1,93 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { IMAGE_API_URL } from '@/api';
+import { api, IMAGE_API_URL } from '@/api';
 import { Cabecalho } from '@/components/Cabecalho';
 import { Imovel } from '@/components/Imovel';
+import { Mapa } from '@/components/Mapa';
 import { Separador } from '@/components/Separador';
 import { Usuario } from '@/components/Usuario';
-import { ImovelEnderecado } from '@/models/Imovel';
+import { useGeolocalizacao } from '@/hooks/useGeolocalizacao';
+import { ImovelDTO, ImovelEnderecado } from '@/models/Imovel';
 import { UsuarioDTO } from '@/models/Usuario';
+import { calcularInformacoes, numerosAleatorios } from '@/utils/calculosHome';
+import { organizaImoveis } from '@/utils/constroiModelos';
 import { icones } from '@/utils/Icones';
-import { Mapa } from '@/components/Mapa';
 
 function App() {
   const [imoveis, definirImoveis] = useState<ImovelEnderecado[]>();
   const [proprietarios, definirProprietarios] = useState<UsuarioDTO[]>();
   const [informacoes, definirInformacoes] = useState<{
-    [key: string]: string;
+    [key: string]: string | number;
   }>();
   const navegar = useNavigate();
+  const geolocalizacao = useGeolocalizacao();
 
-  useState(() => {
-    const imoveisMock = [
-      {
-        id: '1',
-        descricao: '',
-        disponivel: true,
-        endereco: 'Cajazeiras - PB',
-        imagens: [],
-        latitude: 0,
-        longitude: 0,
-        nome: 'a',
-        numInquilinos: 1,
-        preco: 1,
-        tipo: 'Casa',
-        userId: '1',
-      },
-      {
-        id: '2',
-        descricao: '',
-        disponivel: true,
-        endereco: 'Cajazeiras - PB',
-        imagens: [],
-        latitude: 0,
-        longitude: 0,
-        nome: 'b',
-        numInquilinos: 1,
-        preco: 1,
-        tipo: 'Casa',
-        userId: '1',
-      },
-      {
-        id: '3',
-        descricao: '',
-        disponivel: true,
-        endereco: 'Cajazeiras - PB',
-        imagens: [],
-        latitude: 0,
-        longitude: 0,
-        nome: 'c',
-        numInquilinos: 1,
-        preco: 1,
-        tipo: 'Casa',
-        userId: '1',
-      },
-      {
-        id: '4',
-        descricao: '',
-        disponivel: true,
-        endereco: 'Cajazeiras - PB',
-        imagens: [],
-        latitude: 0,
-        longitude: 0,
-        nome: 'd',
-        numInquilinos: 1,
-        preco: 1,
-        tipo: 'Casa',
-        userId: '1',
-      },
+  useEffect(() => {
+    const latitude = geolocalizacao.latitude;
+    const longitude = geolocalizacao.longitude;
+    if (latitude === 0 && longitude === 0) return;
+
+    (async () => {
+      const token = localStorage.getItem('auth.token');
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      const resposta = await api
+        .get(`/imoveis/local/5?latitude=${latitude}&longitude=${longitude}`)
+        .then(resposta => resposta.data as ImovelDTO[])
+        .catch(() => []);
+
+      await selecionarImoveis(resposta);
+      await selecionarProprietarios(resposta);
+      selecionarInformacoes(resposta);
+    })();
+  }, [geolocalizacao.latitude, geolocalizacao.longitude]);
+
+  async function selecionarImoveis(imoveisDTO: ImovelDTO[]) {
+    const imoveisSelecionados: ImovelDTO[] = [];
+    const imoveisDisponiveis = imoveisDTO.filter(imovel => imovel.disponivel);
+    const indices = numerosAleatorios(
+      imoveisDisponiveis.length,
+      Math.min(imoveisDisponiveis.length, 4)
+    );
+    indices.forEach(indice =>
+      imoveisSelecionados.push(imoveisDisponiveis[indice])
+    );
+
+    const imoveisEnderecados = await organizaImoveis(imoveisSelecionados);
+
+    definirImoveis(imoveisEnderecados);
+  }
+
+  async function selecionarProprietarios(imoveisDTO: ImovelDTO[]) {
+    const token = localStorage.getItem('auth.token');
+    const proprietariosSelecionados: UsuarioDTO[] = [];
+    const idsProprietariosSelecionados: string[] = [];
+    const idsProprietarios = [
+      ...new Set(imoveisDTO.map(imovel => imovel.userId)),
     ];
-    definirImoveis(imoveisMock);
+    const indices = numerosAleatorios(
+      idsProprietarios.length,
+      Math.min(idsProprietarios.length, 4)
+    );
+    indices.forEach(indice =>
+      idsProprietariosSelecionados.push(idsProprietarios[indice])
+    );
 
-    const proprietariosMock = [
-      {
-        id: '1',
-        email: '',
-        imagem: { nomeImagem: '' },
-        imoveis: [],
-        nome: 'a',
-        telefone: '',
-        username: '',
-      },
-      {
-        id: '2',
-        email: '',
-        imagem: { nomeImagem: '' },
-        imoveis: [],
-        nome: 'b',
-        telefone: '',
-        username: '',
-      },
-      {
-        id: '3',
-        email: '',
-        imagem: { nomeImagem: '' },
-        imoveis: [],
-        nome: 'c',
-        telefone: '',
-        username: '',
-      },
-    ];
-    definirProprietarios(proprietariosMock);
+    for (const id of idsProprietariosSelecionados) {
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      await api
+        .get('/users/id/' + id)
+        .then(resposta =>
+          proprietariosSelecionados.push(resposta.data as UsuarioDTO)
+        );
+    }
 
-    const informacoesMock = {
-      imoveis: '9',
-      ocupacao: '66,6',
-      imoveisDisponiveis: '4',
-      menorValorDisponiveis: '100',
-      mediaValorDisponiveis: '200',
-      maiorValorDisponiveis: '300',
-      imoveisAlugados: '6',
-      menorValorAlugados: '150',
-      mediaValorAlugados: '300',
-      maiorValorAlugados: '450',
-    };
-    definirInformacoes(informacoesMock);
-  });
+    definirProprietarios(proprietariosSelecionados);
+  }
+
+  function selecionarInformacoes(imoveisDTO: ImovelDTO[]) {
+    const informacoesSelecionadas = calcularInformacoes(imoveisDTO);
+    definirInformacoes(informacoesSelecionadas);
+  }
 
   return (
     <>
@@ -209,17 +173,17 @@ function App() {
 
                     <div className="flex flex-row justify-between items-center w-full gap-2">
                       <span>Menor valor:</span>
-                      <span>R$ {informacoes.menorValorDisponiveis}</span>
+                      <span>{informacoes.menorValorDisponiveis}</span>
                     </div>
 
                     <div className="flex flex-row justify-between items-center w-full gap-2">
                       <span>Média de valores:</span>
-                      <span>R$ {informacoes.mediaValorDisponiveis}</span>
+                      <span>{informacoes.mediaValorDisponiveis}</span>
                     </div>
 
                     <div className="flex flex-row justify-between items-center w-full gap-2">
                       <span>Maior valor</span>
-                      <span>R$ {informacoes.maiorValorDisponiveis}</span>
+                      <span>{informacoes.maiorValorDisponiveis}</span>
                     </div>
                   </div>
 
@@ -235,17 +199,17 @@ function App() {
 
                     <div className="flex flex-row justify-between items-center w-full gap-2">
                       <span>Menor valor:</span>
-                      <span>R$ {informacoes.menorValorAlugados}</span>
+                      <span>{informacoes.menorValorAlugados}</span>
                     </div>
 
                     <div className="flex flex-row justify-between items-center w-full gap-2">
                       <span>Média de valores:</span>
-                      <span>R$ {informacoes.mediaValorAlugados}</span>
+                      <span>{informacoes.mediaValorAlugados}</span>
                     </div>
 
                     <div className="flex flex-row justify-between items-center w-full gap-2">
                       <span>Maior valor</span>
-                      <span>R$ {informacoes.maiorValorAlugados}</span>
+                      <span>{informacoes.maiorValorAlugados}</span>
                     </div>
                   </div>
                 </div>
@@ -255,7 +219,7 @@ function App() {
         </div>
 
         <div className="rounded-md w-full h-[400px] overflow-hidden">
-          <Mapa />
+          <Mapa realizarRequisicoes />
         </div>
       </div>
     </>
