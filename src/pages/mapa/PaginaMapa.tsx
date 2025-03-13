@@ -1,5 +1,4 @@
 import { Botao } from '@/components/Botao';
-import { Cabecalho } from '@/components/Cabecalho';
 import { Campo, CampoIcones } from '@/components/Campo';
 import { Mapa } from '@/components/Mapa';
 import { Coordenadas } from '@/models/Imovel';
@@ -29,9 +28,7 @@ function PaginaMapa() {
 
   return (
     <div className="h-screen">
-      <Cabecalho />
-
-      <div className="flex flex-col items-center gap-10 w-full h-full px-6 pt-[112px] pb-10 md:px-20 md:pt-32 md:pb-20">
+      <div className="flex flex-col items-center gap-10 w-full h-full px-6 pt-8 pb-10 md:px-20 md:pb-20">
         <Campo
           labelFor="pesquisar"
           id="pesquisar"
@@ -43,12 +40,7 @@ function PaginaMapa() {
         />
 
         <div className="grow rounded-md w-full min-h-[400px] overflow-hidden">
-          <Mapa
-            aoMudar={definirCoordenadas}
-            centro={centro}
-            marcarToque
-            realizarRequisicoes
-          />
+          <Mapa aoMudar={definirCoordenadas} centro={centro} marcarToque />
         </div>
 
         <Botao

@@ -2,12 +2,10 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
-import { api } from '@/api';
 import { Imovel } from './Imovel';
 import { useGeolocalizacao } from '@/hooks/useGeolocalizacao';
+import { Imagem } from '@/models/Imagem';
 import { icones } from '@/utils/Icones';
-import { ImovelDTO } from '@/models/Imovel';
-import { construirModeloImoveisMapa } from '@/utils/constroiModelos';
 
 let temporizador = setTimeout(() => {}, 0);
 
@@ -18,6 +16,15 @@ interface MapaCoordenadas {
 
 interface CentroPropriedades {
   centro: MapaCoordenadas;
+}
+
+interface ImovelMapa {
+  id: string;
+  nome: string;
+  coordenadas: MapaCoordenadas;
+  disponivel: boolean;
+  preco: number;
+  imagens: Imagem[];
 }
 
 interface MapaPropriedades {
@@ -44,7 +51,7 @@ function Mapa({
   });
   const [marcadorToque, definirMarcadorToque] = useState<MapaCoordenadas>();
   const [marcadorCentro, definirMarcadorCentro] = useState<MapaCoordenadas>();
-  const [imoveis, definirImoveis] = useState<ImovelDTO[]>([]);
+  const [imoveis, definirImoveis] = useState<ImovelMapa[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -70,20 +77,45 @@ function Mapa({
     (async () => {
       if (!realizarRequisicoes) return;
 
+      // TODO: substituir por requisição a API
       const latitude = localizacao.latitude;
       const longitude = localizacao.longitude;
-
-      if (latitude === 0 && longitude === 0) return;
-
-      const token = localStorage.getItem('auth.token');
-      api.defaults.headers.common.Authorization = `Bearer ${token}`;
-      const resposta = await api
-        .get(`/imoveis/local/10?latitude=${latitude}&longitude=${longitude}`)
-        .then(resposta => resposta.data as ImovelDTO[])
-        .catch(() => []);
-
-      const imoveisFormatados = construirModeloImoveisMapa(resposta);
-      definirImoveis(imoveisFormatados);
+      const imoveisMock = [
+        {
+          id: '1',
+          nome: 'Exemplo1',
+          coordenadas: {
+            latitude: latitude + 0.005,
+            longitude: longitude + 0.015,
+          },
+          disponivel: true,
+          preco: 123,
+          imagens: [{ nomeImagem: icones.pinImovelDisponivel }],
+        },
+        {
+          id: '2',
+          nome: 'Exemplo2',
+          coordenadas: {
+            latitude: latitude + 0.01,
+            longitude: longitude + 0.01,
+          },
+          disponivel: false,
+          preco: 234,
+          imagens: [{ nomeImagem: icones.pinImovelIndisponivel }],
+        },
+        {
+          id: '3',
+          nome: 'Exemplo3',
+          coordenadas: {
+            latitude: latitude + 0.015,
+            longitude: longitude + 0.005,
+          },
+          disponivel: false,
+          preco: 345,
+          imagens: [{ nomeImagem: icones.pinImovelIndisponivel }],
+        },
+      ];
+      definirImoveis(imoveisMock);
     })();
   }, [localizacao, realizarRequisicoes]);
 
@@ -101,7 +133,10 @@ function Mapa({
           return (
             <Marker
               key={indice}
-              position={[imovel.latitude, imovel.longitude]}
+              position={[
+                imovel.coordenadas.latitude,
+                imovel.coordenadas.longitude,
+              ]}
               icon={
                 new L.Icon({
                   iconUrl: pinImovel,
@@ -118,7 +153,7 @@ function Mapa({
                   <Imovel
                     id={imovel.id}
                     nome={imovel.nome}
-                    imagem={imovel.imagens[0]?.nomeImagem}
+                    imagem={imovel.imagens[0].nomeImagem}
                     preco={imovel.preco}
                     disponivel={imovel.disponivel}
                     detalhar={false}

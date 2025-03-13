@@ -16,7 +16,7 @@ function Usuario({ id, nome, imagem, ocupacao, reverso }: UsuarioPropriedades) {
     <div
       className="flex items-center gap-4 w-full overflow-hidden cursor-pointer flex-row"
       style={{ flexDirection: reverso ? 'row-reverse' : 'row' }}
-      onClick={() => navegar('/perfil/' + id)}
+      onClick={() => navegar('/usuarios/' + id)}
     >
       <img
         src={imagem || icones.usuarioPadrao}

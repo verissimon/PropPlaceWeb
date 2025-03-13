@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface SeletorImagemPropriedades {
-  aoMudar: (valor: File) => void;
+  aoMudar: (valor: string) => void;
 }
 
 function SeletorImagem({ aoMudar }: SeletorImagemPropriedades) {
@@ -10,8 +10,9 @@ function SeletorImagem({ aoMudar }: SeletorImagemPropriedades) {
     if (arquivos?.length !== 1) return;
 
     const arquivo = arquivos[0];
+    const url = URL.createObjectURL(arquivo);
 
-    aoMudar(arquivo);
+    aoMudar(url);
   }
 
   return (
