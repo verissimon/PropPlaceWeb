@@ -1,5 +1,5 @@
 import { Imagem } from './Imagem';
-import { ImovelDTO } from './Imovel';
+import { ImovelDTO, ImovelEnderecado } from './Imovel';
 
 type Usuario = {
   id: string;
@@ -16,4 +16,9 @@ type UsuarioDTO = Usuario & {
   imagem: Imagem;
 };
 
-export type { Usuario, UsuarioDTO };
+type UsuarioPerfil = Usuario & {
+  imoveis: ImovelEnderecado[];
+  imagem: Imagem;
+};
+
+export type { Usuario, UsuarioDTO, UsuarioPerfil };
