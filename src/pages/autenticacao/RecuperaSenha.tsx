@@ -58,6 +58,9 @@ function RecuperaSenha() {
       </h2>
       <form onSubmit={handleSubmit(enviar)} className="space-y-4 w-full">
         <Campo
+          labelFor="email"
+          id="email"
+          name="email"
           titulo="E-mail"
           type="email"
           icone={CampoIcones.EMAIL}

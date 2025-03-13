@@ -77,6 +77,9 @@ function AluguelImovel() {
           onSubmit={handleSubmit(enviarEmail)}
         >
           <Campo
+            labelFor="nome"
+            id="nome"
+            name="nome"
             titulo="Nome completo"
             placeholder="Jose da Silva"
             register={registrador('nome')}
@@ -84,6 +87,9 @@ function AluguelImovel() {
           />
 
           <Campo
+            labelFor="telefone"
+            id="telefone"
+            name="telefone"
             titulo="Número para contato"
             placeholder="(00) 9 1234-5678"
             register={registrador('telefone')}
@@ -91,6 +97,9 @@ function AluguelImovel() {
           />
 
           <Campo
+            labelFor="quantidade-pessoas"
+            id="quantidade-pessoas"
+            name="quatidade-pessoas"
             titulo="Quantidade de pessoas"
             placeholder="1"
             register={registrador('numInquilinos')}
@@ -102,6 +111,9 @@ function AluguelImovel() {
           </p>
 
           <Campo
+            labelFor="data-inicial"
+            id="data-inicial"
+            name="data-inicial"
             titulo="Data inicial"
             placeholder="01/12/0000"
             register={registrador('dataInicioContrato')}
@@ -110,6 +122,9 @@ function AluguelImovel() {
           />
 
           <Campo
+            labelFor="data-final"
+            id="data-final"
+            name="data-final"
             titulo="Data final"
             placeholder="01/12/0000"
             register={registrador('dataFinalContrato')}

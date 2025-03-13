@@ -60,6 +60,9 @@ function NovaSenha() {
       </h2>
       <form onSubmit={handleSubmit(enviar)} className="space-y-4 w-full">
         <Campo
+          labelFor="nova-senha"
+          id="nova-senha"
+          name="nova-senha"
           titulo="Nova Senha"
           type="password"
           icone={CampoIcones.CADEADO}
@@ -67,6 +70,9 @@ function NovaSenha() {
           register={register('senha')}
         />
         <Campo
+          labelFor="repete-senha"
+          id="repete-senha"
+          name="repete-senha"
           titulo="Confirmar Nova Senha"
           type="password"
           icone={CampoIcones.CADEADO}
